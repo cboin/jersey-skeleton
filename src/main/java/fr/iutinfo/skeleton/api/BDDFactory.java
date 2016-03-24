@@ -12,7 +12,7 @@ public class BDDFactory {
         if(dbi == null) {
            try {
 			Class.forName("com.mysql.jdbc.Driver");
-			dbi = new DBI("jdbc:mysql://mysqlserv.iut-infobio.priv.univ-lille1.fr/bourgeop", "bourgeop", "pierre");
+			dbi = new DBI("jdbc:mysql://host/db", "user", "pwd");
 			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
