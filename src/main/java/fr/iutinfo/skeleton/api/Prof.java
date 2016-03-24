@@ -7,15 +7,15 @@ import org.slf4j.LoggerFactory;
 public class Prof {
     final static Logger logger = LoggerFactory.getLogger(Prof.class);
 
-    private String codeProf;
-    private String couleurFond;
+    private int codeProf;
+    private int couleurFond;
     private String nom;
     private String prenom;
     private String alias;
    
 
 
-    public Prof(String codeProf, String nom , String prenom) {
+    public Prof(int codeProf, String nom , String prenom) {
         this.codeProf = codeProf;
         this.nom = nom;
         this.prenom = prenom;
@@ -26,22 +26,22 @@ public class Prof {
     }
 
 
-	public String getCodeProf() {
+	public int getCodeProf() {
 		return codeProf;
 	}
 
 
-	public void setCodeProf(String codeProf) {
+	public void setCodeProf(int codeProf) {
 		this.codeProf = codeProf;
 	}
 
 
-	public String getCouleurFond() {
+	public int getCouleurFond() {
 		return couleurFond;
 	}
 
 
-	public void setCouleurFond(String couleurFond) {
+	public void setCouleurFond(int couleurFond) {
 		this.couleurFond = couleurFond;
 	}
 

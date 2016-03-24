@@ -15,7 +15,7 @@ public interface Calendrier_GroupeDao {
 	
 	@SqlQuery("select * from calendriers_groupes where code= :code")
 	@RegisterMapperFactory(BeanMapperFactory.class)
-	Groupe findByCodeCalendrierGroupe(@Bind("code") String code);
+	Groupe findByCodeCalendrierGroupe(@Bind("code") int code);
 	
 	@SqlQuery("select * from calendriers_groupes order by codeRessource")
 	@RegisterMapperFactory(BeanMapperFactory.class)

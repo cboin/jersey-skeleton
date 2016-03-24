@@ -21,7 +21,7 @@ public interface ProfDao {
 	*/
 	@SqlQuery("select * from ressources_profs where codeProf= :codeProf")
 	@RegisterMapperFactory(BeanMapperFactory.class)
-	Prof findByCodeProf(@Bind("codeProf") String codeProf);
+	Prof findByCodeProf(@Bind("codeProf") int codeProf);
 	
 	@SqlQuery("select * from ressources_profs order by nom")
 	@RegisterMapperFactory(BeanMapperFactory.class)

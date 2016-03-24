@@ -7,14 +7,14 @@ public class Salle {
 	
 	 final static Logger logger = LoggerFactory.getLogger(Salle.class);
 	 
-	 private String codeSalle;
-	 private String couleurFond;
+	 private int codeSalle;
+	 private int couleurFond;
 	 private String nom;
 	 private int capacite;
 	 private String alias;
 	 
 	 
-	 public Salle(String codeSalle,String nom, int capacite){
+	 public Salle(int codeSalle,String nom, int capacite){
 		 this.codeSalle= codeSalle;
 		 this.nom=nom;
 		 this.capacite=capacite;
@@ -24,19 +24,19 @@ public class Salle {
 		 
 	 }
 
-	public String getCodeSalle() {
+	public int getCodeSalle() {
 		return codeSalle;
 	}
 
-	public void setCodeSalle(String codeSalle) {
+	public void setCodeSalle(int codeSalle) {
 		this.codeSalle = codeSalle;
 	}
 
-	public String getCouleurFond() {
+	public int getCouleurFond() {
 		return couleurFond;
 	}
 
-	public void setCouleurFond(String couleurFond) {
+	public void setCouleurFond(int couleurFond) {
 		this.couleurFond = couleurFond;
 	}
 

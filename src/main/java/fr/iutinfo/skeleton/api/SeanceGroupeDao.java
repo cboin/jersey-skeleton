@@ -10,16 +10,16 @@ import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 
-public interface GroupeDao {
+public interface SeanceGroupeDao {
 	
-	
-	@SqlQuery("select * from ressources_groupes where codeGroupe= :codeGroupe")
+
+	@SqlQuery("select * from seances_groupes where codeSeance= :codeSeance")
 	@RegisterMapperFactory(BeanMapperFactory.class)
-	Groupe findByCodeGroupe(@Bind("codeGroupe") int codeGroupe);
+	SeanceGroupe findByCodeSeanceGroupe(@Bind("codeSeance") int codeSeance);
 	
-	@SqlQuery("select * from ressources_groupes order by nom")
+	@SqlQuery("select * from seances_groupes")
 	@RegisterMapperFactory(BeanMapperFactory.class)
-	List<Groupe> all();
+	List<SeanceGroupe> all();
 
 
 	void close();

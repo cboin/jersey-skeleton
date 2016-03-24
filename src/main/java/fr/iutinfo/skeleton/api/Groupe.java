@@ -7,14 +7,14 @@ import org.slf4j.LoggerFactory;
 public class Groupe {
     final static Logger logger = LoggerFactory.getLogger(Groupe.class);
 
-    private String codeGroupe;
-    private String couleurFond;
+    private int codeGroupe;
+    private int couleurFond;
     private String nom;
     private String alias;
    
 
 
-    public Groupe(String codeGroupe,String nom) {
+    public Groupe(int codeGroupe,String nom) {
         this.codeGroupe = codeGroupe;
         this.nom = nom;
         
@@ -24,19 +24,19 @@ public class Groupe {
     	
     }
 
-	public String getCodeGroupe() {
+	public int getCodeGroupe() {
 		return codeGroupe;
 	}
 
-	public void setCodeGroupe(String codeGroupe) {
+	public void setCodeGroupe(int codeGroupe) {
 		this.codeGroupe = codeGroupe;
 	}
 
-	public String getCouleurFond() {
+	public int getCouleurFond() {
 		return couleurFond;
 	}
 
-	public void setCouleurFond(String couleurFond) {
+	public void setCouleurFond(int couleurFond) {
 		this.couleurFond = couleurFond;
 	}
 
