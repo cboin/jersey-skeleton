@@ -26,6 +26,10 @@ public class Groupe {
     	
     }
 
+	public String getCouleurHex(){
+		return "#" + (""+couleurFond).substring(2);
+	}
+
 	public int getCodeGroupe() {
 		return codeGroupe;
 	}

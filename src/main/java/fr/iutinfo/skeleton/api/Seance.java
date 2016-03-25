@@ -31,7 +31,6 @@ public class Seance {
 	}
 
 
-
 	public int getCodeSeance() {
 		return codeSeance;
 	}

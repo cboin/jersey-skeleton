@@ -22,6 +22,8 @@ public interface SeanceGroupeDao {
 	List<SeanceGroupe> all();
 
 
+
+
 	void close();
 
 }

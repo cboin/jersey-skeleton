@@ -2,12 +2,18 @@
     <h1>Emploi du temps</h1>
 
     <label for="promotion"> Promo : </label>
+
     <select name="promotion" id="promotion" ng-model="promos">
         <option value="none">Selectionnez une promo</option>
-        <option ng-repeat="option in promotions" value="{{option.codeGroupe}}">{{option.nom}}</option>
+        <option ng-repeat="option in promotions | filter:query" value="{{option.codeGroupe}}">{{option.nom}}</option>
     </select>
+
+    <input type="text" placeholder="Recherche..." ng-model="query" size="10">
+
     <br /><br />
 </div>
+
+
 
 <div class="row">
     <div id="calendar" style="margin-bottom: 90px;"></div>
