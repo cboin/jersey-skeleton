@@ -1,5 +1,6 @@
 package fr.iutinfo.skeleton.api;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -41,5 +42,7 @@ public class GroupeDBResource {
 	public List<Groupe> getAllGroupes() {
 		return dao.all();
 	}
+	
+	
 
 }
