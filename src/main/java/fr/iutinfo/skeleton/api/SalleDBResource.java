@@ -41,5 +41,6 @@ public class SalleDBResource {
 	public List<Salle> getAllSalle() {
 		return dao.all();
 	}
+	
 
 }
