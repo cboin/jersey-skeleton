@@ -1,3 +1,4 @@
+
 package fr.iutinfo.skeleton.api;
 
 import javax.inject.Singleton;
