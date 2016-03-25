@@ -35,7 +35,31 @@ edtControllers.controller('EDTController', function ($scope, $http) {
                 maxTime: "21:00:00",
 
                 defaultView: 'agendaWeek',
-                editable: false,
+                
+                selectable: true,
+		selectHelper: true,
+		select: function(start, end) {
+			var title = prompt('Nom de l\'événement:');
+			var eventData;
+			if (title) {
+				eventData = {
+					title: title,
+					start: start,
+					end: end
+				};
+				$('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+			}
+			$('#calendar').fullCalendar('unselect');
+		},
+		editable: true,
+		eventLimit: true,
+		
+        lang: 'fr',
+        weekNumbers: true,
+        eventTextColor: "black",
+        eventBorderColor: "black",
+        color: "lightgrey",
+        height: "auto",
                 eventLimit: true, // allow "more" link when too many events
                 lang: 'fr',
                 weekNumbers: true,
