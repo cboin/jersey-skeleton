@@ -15,67 +15,76 @@ edtControllers.controller('EDTController', function ($scope, $http) {
      * Promotions
      */
     $http.get('v1/groupe').success(function (data) {
-        console.log(data);
         $scope.promotions = data;
 
 
         $("#promotion").change(function(){
 
-            // on affiche le calendrier en selectionnant la promo
-            $('#calendar').fullCalendar({
-                header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'month,agendaWeek,agendaDay'
-                },
-                scrollTime: '12:00:00', //Determines how far down the scroll pane is initially scrolled down
+        var groupeId= $(this).val();
+
+            $http.get('v1/cours/'+groupeId).success(function (dataCours) {
+
+                console.log(dataCours);
 
 
-                minTime: "08:00:00",
-                maxTime: "21:00:00",
+                // on affiche le calendrier en selectionnant la promo
+                $('#calendar').fullCalendar({
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'month,agendaWeek,agendaDay'
+                    },
+                    scrollTime: '12:00:00', //Determines how far down the scroll pane is initially scrolled down
 
-                defaultView: 'agendaWeek',
-                
-                selectable: true,
-		selectHelper: true,
-		select: function(start, end) {
-			var title = prompt('Nom de l\'événement:');
-			var eventData;
-			if (title) {
-				eventData = {
-					title: title,
-					start: start,
-					end: end
-				};
-				$('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
-			}
-			$('#calendar').fullCalendar('unselect');
-		},
-		editable: true,
-		eventLimit: true,
-		
-        lang: 'fr',
-        weekNumbers: true,
-        eventTextColor: "black",
-        eventBorderColor: "black",
-        color: "lightgrey",
-        height: "auto",
-                eventLimit: true, // allow "more" link when too many events
-                lang: 'fr',
-                weekNumbers: true,
-                eventTextColor: "black",
-                eventBorderColor: "black",
-                color: "lightgrey",
-                height: "auto",
-                dayClick: function (date, jsEvent, view) {
 
-                    $('#calendar').fullCalendar('gotoDate', date);
-                    $('#calendar').fullCalendar('changeView', 'agendaDay');
+                    minTime: "08:00:00",
+                    maxTime: "21:00:00",
 
-                },
-                // SlotEventOverlap : "false" ,
-                timeFormat: 'HH:mm'
+                    defaultView: 'agendaWeek',
+
+                    selectable: true,
+                    selectHelper: true,
+                    select: function (start, end) {
+                        var title = prompt('Nom de l\'événement:');
+                        var eventData;
+                        if (title) {
+                            eventData = {
+                                title: title,
+                                start: start,
+                                end: end
+                            };
+                            $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+                        }
+                        $('#calendar').fullCalendar('unselect');
+                    },
+                    editable: true,
+                    eventLimit: true,
+
+                    lang: 'fr',
+                    weekNumbers: true,
+                    eventTextColor: "black",
+                    eventBorderColor: "black",
+                    color: "lightgrey",
+                    height: "auto",
+                    eventLimit: true, // allow "more" link when too many events
+                    lang: 'fr',
+                    weekNumbers: true,
+                    eventTextColor: "black",
+                    eventBorderColor: "black",
+                    color: "lightgrey",
+                    height: "auto",
+                    dayClick: function (date, jsEvent, view) {
+
+                        $('#calendar').fullCalendar('gotoDate', date);
+                        $('#calendar').fullCalendar('changeView', 'agendaDay');
+
+                    },
+                    // SlotEventOverlap : "false" ,
+                    timeFormat: 'HH:mm'
+                });
+
             });
+
         });
 
 
