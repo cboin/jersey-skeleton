@@ -11,17 +11,18 @@ import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 
 public interface ProfDao {
-	
-	/*@SqlUpdate("create table ressources_profs(codeProf varchar(100), couleurFond varchar(100),nom varchar(100),prenom varchar(100), alias varchar(100))")
-	void createProfTable();
 
-	@SqlUpdate("insert into ressources_profs (codeProf,couleurFond,nom,prenom,alias) values (:codeProf,:couleurFond,:nom, :prenom, :alias)")
-	@GetGeneratedKeys
-	int insert(@BindBean() Prof prof);
-	*/
+	@SqlUpdate("drop table if exists ressources_profs")
+	void dropProfTable();
+	
+	@SqlUpdate("create table ressources_profs(codeProf integer primary key autoincrement, couleurFond integer,nom varchar(100),prenom varchar(100), alias varchar(100))")
+	void createProfTable();
+	
 	@SqlQuery("select * from ressources_profs where codeProf= :codeProf")
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	Prof findByCodeProf(@Bind("codeProf") int codeProf);
+	@SqlUpdate("insert into ressources_profs(nom, prenom) values(:nom, :prenom)")
+	int insert(@BindBean() Prof prof);
 	
 	@SqlQuery("select * from ressources_profs order by nom")
 	@RegisterMapperFactory(BeanMapperFactory.class)

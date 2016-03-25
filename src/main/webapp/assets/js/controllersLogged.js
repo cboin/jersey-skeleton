@@ -17,23 +17,26 @@ edtControllers.controller('EDTController', function ($scope, $http) {
     $http.get('v1/groupe').success(function (data) {
         console.log(data);
         $scope.promotions = data;
-    });
 
 
-    $('#calendar').fullCalendar({
-        header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month,agendaWeek,agendaDay'
-        },
-        scrollTime: '12:00:00', //Determines how far down the scroll pane is initially scrolled down
+        $("#promotion").change(function(){
+
+            // on affiche le calendrier en selectionnant la promo
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                scrollTime: '12:00:00', //Determines how far down the scroll pane is initially scrolled down
 
 
-        minTime: "08:00:00",
-        maxTime: "21:00:00",
+                minTime: "08:00:00",
+                maxTime: "21:00:00",
 
-        defaultView: 'agendaWeek',
-        selectable: true,
+                defaultView: 'agendaWeek',
+                
+                selectable: true,
 		selectHelper: true,
 		select: function(start, end) {
 			var title = prompt('Nom de l\'événement:');
@@ -50,21 +53,35 @@ edtControllers.controller('EDTController', function ($scope, $http) {
 		},
 		editable: true,
 		eventLimit: true,
+		
         lang: 'fr',
         weekNumbers: true,
         eventTextColor: "black",
         eventBorderColor: "black",
         color: "lightgrey",
         height: "auto",
-        dayClick: function (date, jsEvent, view) {
+                eventLimit: true, // allow "more" link when too many events
+                lang: 'fr',
+                weekNumbers: true,
+                eventTextColor: "black",
+                eventBorderColor: "black",
+                color: "lightgrey",
+                height: "auto",
+                dayClick: function (date, jsEvent, view) {
 
-            $('#calendar').fullCalendar('gotoDate', date);
-            $('#calendar').fullCalendar('changeView', 'agendaDay');
+                    $('#calendar').fullCalendar('gotoDate', date);
+                    $('#calendar').fullCalendar('changeView', 'agendaDay');
 
-        },
-        // SlotEventOverlap : "false" ,
-        timeFormat: 'HH:mm'
+                },
+                // SlotEventOverlap : "false" ,
+                timeFormat: 'HH:mm'
+            });
+        });
+
+
     });
+
+
 
 
 });
