@@ -10,6 +10,9 @@ edtApp.config(['$routeProvider',
             })
             .when('/log/:token', {
                 controller: 'LogController'
+            }).when('/edt', {
+                templateUrl: 'pages/logged/edt.html',
+                controller: 'EDTController'
             })
             .when('/error', {
                 templateUrl: 'pages/error.html'
