@@ -11,16 +11,18 @@ public class Groupe {
     private int couleurFond;
     private String nom;
     private String alias;
+    private String identifiant;
    
 
 
-    public Groupe(int codeGroupe,String nom) {
+    public Groupe(int codeGroupe,String nom, String identifiant) {
         this.codeGroupe = codeGroupe;
         this.nom = nom;
         
     }
     
-    public Groupe() {
+
+	public Groupe() {
     	
     }
 
@@ -56,7 +58,13 @@ public class Groupe {
 		this.alias = alias;
 	}
 
+	public String getIdentifiant() {
+			return identifiant;
+	}
 
+	public void setIdentifiant(String identifiant) {
+			this.identifiant = identifiant;
+	}
 	
  
 
