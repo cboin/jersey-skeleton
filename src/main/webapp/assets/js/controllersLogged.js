@@ -9,7 +9,15 @@ edtControllers.controller('LogController', ['$scope', function ($scope, $token) 
 
 }]);
 
-edtControllers.controller('EDTController', ['$scope', function ($scope, $token) {
+edtControllers.controller('EDTController', function ($scope, $http) {
+
+    /**
+     * Promotions
+     */
+    $http.get('v1/groupe').success(function (data) {
+        console.log(data);
+        $scope.promotions = data;
+    });
 
 
     $('#calendar').fullCalendar({
@@ -32,7 +40,7 @@ edtControllers.controller('EDTController', ['$scope', function ($scope, $token) 
         eventTextColor: "black",
         eventBorderColor: "black",
         color: "lightgrey",
-        height:"auto",
+        height: "auto",
         dayClick: function (date, jsEvent, view) {
 
             $('#calendar').fullCalendar('gotoDate', date);
@@ -44,8 +52,7 @@ edtControllers.controller('EDTController', ['$scope', function ($scope, $token) 
     });
 
 
-}])
-;
+});
 
 
 
