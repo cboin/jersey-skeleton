@@ -18,6 +18,7 @@ public class BDDFactory {
 			dbi = new DBI("jdbc:mysql://" + db.getHost() + "/" + db.getDb() + ", " + db.getUser() + ", " + db.getPassword());			
 		} catch (ClassNotFoundException e) {
 
+
 			e.printStackTrace();
 		}
            
