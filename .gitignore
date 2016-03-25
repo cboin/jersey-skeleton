@@ -11,5 +11,4 @@ target/
 # database file
 *.db
 out/
-lib/
 *.properties
