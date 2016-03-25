@@ -2,7 +2,7 @@ edtApp.config(['$routeProvider',
     function ($routeProvider) {
         $routeProvider
             .when('/', {
-                templateUrl: 'pages/index.html',
+                templateUrl: 'pages/login.html',
                 controller: 'HomeController'
             })
             .when('/error', {

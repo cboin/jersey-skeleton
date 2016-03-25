@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Salle {
+<<<<<<< HEAD
 
 	final static Logger logger = LoggerFactory.getLogger(Salle.class);
 
@@ -23,19 +24,19 @@ public class Salle {
 
 	}
 
-	public String getCodeSalle() {
+	public int getCodeSalle() {
 		return codeSalle;
 	}
 
-	public void setCodeSalle(String codeSalle) {
+	public void setCodeSalle(int codeSalle) {
 		this.codeSalle = codeSalle;
 	}
 
-	public String getCouleurFond() {
+	public int getCouleurFond() {
 		return couleurFond;
 	}
 
-	public void setCouleurFond(String couleurFond) {
+	public void setCouleurFond(int couleurFond) {
 		this.couleurFond = couleurFond;
 	}
 

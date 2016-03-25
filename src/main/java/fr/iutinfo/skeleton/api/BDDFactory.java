@@ -17,6 +17,7 @@ public class BDDFactory {
 			Class.forName("com.mysql.jdbc.Driver");
 			dbi = new DBI("jdbc:mysql://" + db.getHost() + "/" + db.getDb() + ", " + db.getUser() + ", " + db.getPassword());			
 		} catch (ClassNotFoundException e) {
+
 			e.printStackTrace();
 		}
            
