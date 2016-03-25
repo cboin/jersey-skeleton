@@ -2,22 +2,27 @@ package fr.iutinfo.skeleton.api;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Seance {
+	
+	final static Logger logger = LoggerFactory.getLogger(Seance.class);
 	
 	private int codeSeance;
 	private Date dateSeance;
 	private int heureSeance;
 	private int dureeSeance;
-	private int codeEnseignement;
+	private int diffusable;
+	private int dateModif;
+	private String Enseignement;
+	private String Salle;
+	private String Groupe;
+	private String Prof;
+	private String GroupeId;
+	private int couleurFond;
+	private int couleurPolice;
 
-	
-	public Seance(int codeSeance , Date dateSeance , int heureSeance, int dureeSeance, int codeEnseignement){
-		this.codeSeance=codeSeance;
-		this.dateSeance=dateSeance;
-		this.heureSeance=heureSeance;
-		this.dureeSeance=dureeSeance;
-		this.codeEnseignement=codeEnseignement;
-	}
 	
 	
 	public Seance(){
@@ -25,9 +30,11 @@ public class Seance {
 	}
 
 
+
 	public int getCodeSeance() {
 		return codeSeance;
 	}
+
 
 
 	public void setCodeSeance(int codeSeance) {
@@ -35,9 +42,11 @@ public class Seance {
 	}
 
 
+
 	public Date getDateSeance() {
 		return dateSeance;
 	}
+
 
 
 	public void setDateSeance(Date dateSeance) {
@@ -45,9 +54,11 @@ public class Seance {
 	}
 
 
+
 	public int getHeureSeance() {
 		return heureSeance;
 	}
+
 
 
 	public void setHeureSeance(int heureSeance) {
@@ -55,9 +66,11 @@ public class Seance {
 	}
 
 
+
 	public int getDureeSeance() {
 		return dureeSeance;
 	}
+
 
 
 	public void setDureeSeance(int dureeSeance) {
@@ -65,14 +78,113 @@ public class Seance {
 	}
 
 
-	public int getCodeEnseignement() {
-		return codeEnseignement;
+
+	public int getDiffusable() {
+		return diffusable;
 	}
 
 
-	public void setCodeEnseignement(int codeEnseignement) {
-		this.codeEnseignement = codeEnseignement;
+
+	public void setDiffusable(int diffusable) {
+		this.diffusable = diffusable;
 	}
-	
+
+
+
+	public int getDateModif() {
+		return dateModif;
+	}
+
+
+
+	public void setDateModif(int dateModif) {
+		this.dateModif = dateModif;
+	}
+
+
+
+	public String getEnseignement() {
+		return Enseignement;
+	}
+
+
+
+	public void setEnseignement(String enseignement) {
+		Enseignement = enseignement;
+	}
+
+
+
+	public String getSalle() {
+		return Salle;
+	}
+
+
+
+	public void setSalle(String salle) {
+		Salle = salle;
+	}
+
+
+
+	public String getGroupe() {
+		return Groupe;
+	}
+
+
+
+	public void setGroupe(String groupe) {
+		Groupe = groupe;
+	}
+
+
+
+	public String getProf() {
+		return Prof;
+	}
+
+
+
+	public void setProf(String prof) {
+		Prof = prof;
+	}
+
+
+
+	public String getGroupeId() {
+		return GroupeId;
+	}
+
+
+
+	public void setGroupeId(String groupeId) {
+		GroupeId = groupeId;
+	}
+
+
+
+	public int getCouleurFond() {
+		return couleurFond;
+	}
+
+
+
+	public void setCouleurFond(int couleurFond) {
+		this.couleurFond = couleurFond;
+	}
+
+
+
+	public int getCouleurPolice() {
+		return couleurPolice;
+	}
+
+
+
+	public void setCouleurPolice(int couleurPolice) {
+		this.couleurPolice = couleurPolice;
+	}
+
+
 	
 }
