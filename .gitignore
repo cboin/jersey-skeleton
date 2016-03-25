@@ -9,6 +9,7 @@ target/
 .idea/
 *.iml
 # database file
-data.db
+*.db
 out/
 lib/
+*.properties
