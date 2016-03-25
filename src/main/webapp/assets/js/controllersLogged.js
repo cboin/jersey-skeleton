@@ -2,6 +2,7 @@ var edtControllers = angular.module('edtControllers', []);
 
 
 edtControllers.controller('LoggedController', ['$scope', function ($scope) {
+    changeTab("accueil");
 }]);
 
 
@@ -10,8 +11,8 @@ edtControllers.controller('LogController', ['$scope', function ($scope, $token) 
 }]);
 
 edtControllers.controller('EDTController', function ($scope, $http) {
+    changeTab("edt");
 
-     $("#calendar").hide();
 
     /**
      * Promotions
@@ -21,7 +22,6 @@ edtControllers.controller('EDTController', function ($scope, $http) {
 
 
         $("#promotion").change(function () {
-            $("#calendar").hide();
 
             var groupeId = $(this).val();
 
@@ -57,13 +57,12 @@ edtControllers.controller('EDTController', function ($scope, $http) {
 
                     // $("#calendar").fullCalendar('renderEvent', cours, true);
 
-                    allCours.push(cours);
+                   allCours.push(cours);
                 }
+                $("#calendar").fullCalendar('addEventSource', allCours, true);
 
-                $("#calendar").fullCalendar('addEventSource', allCours)
-                $("#calendar").fullCalendar( 'rerenderEvents' );
+                $("#calendar").fullCalendar('rerenderEvents');
 
-                $("#calendar").show();
 
 
             });
@@ -86,6 +85,7 @@ edtControllers.controller('EDTController', function ($scope, $http) {
             maxTime: "21:00:00",
 
             defaultView: 'agendaWeek',
+            hiddenDays: [0],
 
             selectable: true,
             selectHelper: true,
@@ -181,3 +181,8 @@ function addHour(string, duree) {
     return heure + ":" + minutes + ":00";
 }
 
+
+function changeTab(name) {
+    $(".active[data-lien]").removeClass('active');
+    $("[data-lien='" + name + "']").addClass('active');
+}
