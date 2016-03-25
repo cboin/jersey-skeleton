@@ -4,7 +4,7 @@
     <label for="promotion"> Promo : </label>
 
     <select name="promotion" id="promotion" ng-model="promos">
-        <option value="none">Selectionnez une promo</option>
+        <option value="none" selected="selected">Selectionnez une promo</option>
         <option ng-repeat="option in promotions | filter:query" value="{{option.codeGroupe}}">{{option.nom}}</option>
     </select>
 

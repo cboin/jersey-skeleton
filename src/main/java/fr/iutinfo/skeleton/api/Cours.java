@@ -11,8 +11,12 @@ public class Cours {
 	private int codeSeance;
 	private int codeRessource;
 	private int codeGroupe;
-	private String nom;
+	private String moduleNom;
 	private String alias;
+	private String nomProf;
+	private String nomGroupe;
+
+
 
 	public Date getDateSeance() {
 		return dateSeance;
@@ -62,12 +66,12 @@ public class Cours {
 		this.codeGroupe = codeGroupe;
 	}
 
-	public String getNom() {
-		return nom;
+	public String getModuleNom() {
+		return moduleNom;
 	}
 
-	public void setNom(String nom) {
-		this.nom = nom;
+	public void setModuleNom(String moduleNom) {
+		this.moduleNom = moduleNom;
 	}
 
 	public String getAlias() {
@@ -76,5 +80,21 @@ public class Cours {
 
 	public void setAlias(String alias) {
 		this.alias = alias;
+	}
+
+	public String getNomProf() {
+		return nomProf;
+	}
+
+	public void setNomProf(String nomProf) {
+		this.nomProf = nomProf;
+	}
+
+	public String getNomGroupe() {
+		return nomGroupe;
+	}
+
+	public void setNomGroupe(String nomGroupe) {
+		this.nomGroupe = nomGroupe;
 	}
 }
