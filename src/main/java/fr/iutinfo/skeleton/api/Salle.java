@@ -4,25 +4,25 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Salle {
-	
-	 final static Logger logger = LoggerFactory.getLogger(Salle.class);
-	 
-	 private int codeSalle;
-	 private int couleurFond;
-	 private String nom;
-	 private int capacite;
-	 private String alias;
-	 
-	 
-	 public Salle(int codeSalle,String nom, int capacite){
-		 this.codeSalle= codeSalle;
-		 this.nom=nom;
-		 this.capacite=capacite;
-	 }
-	 
-	 public Salle(){
-		 
-	 }
+<<<<<<< HEAD
+
+	final static Logger logger = LoggerFactory.getLogger(Salle.class);
+
+	private String codeSalle;
+	private String couleurFond;
+	private String nom;
+	private int capacite;
+	private String alias;
+
+	public Salle(String codeSalle, String nom, int capacite) {
+		this.codeSalle = codeSalle;
+		this.nom = nom;
+		this.capacite = capacite;
+	}
+
+	public Salle() {
+
+	}
 
 	public int getCodeSalle() {
 		return codeSalle;
@@ -63,6 +63,5 @@ public class Salle {
 	public void setAlias(String alias) {
 		this.alias = alias;
 	}
-	
 
 }

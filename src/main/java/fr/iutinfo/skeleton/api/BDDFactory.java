@@ -4,16 +4,18 @@ import javax.inject.Singleton;
 
 import org.skife.jdbi.v2.DBI;
 
+import fr.iutinfo.skeleton.utils.GetDBPropertyValues;
+
 @Singleton
 public class BDDFactory {
     private static DBI dbi = null;
     
     public static DBI getDbi() {
+    	GetDBPropertyValues db = new GetDBPropertyValues("db.properties");
         if(dbi == null) {
            try {
 			Class.forName("com.mysql.jdbc.Driver");
-			dbi = new DBI("jdbc:mysql://localhost/agile", "root", "");
-			
+			dbi = new DBI("jdbc:mysql://" + db.getHost() + "/" + db.getDb() + ", " + db.getUser() + ", " + db.getPassword());			
 		} catch (ClassNotFoundException e) {
 
 			e.printStackTrace();
