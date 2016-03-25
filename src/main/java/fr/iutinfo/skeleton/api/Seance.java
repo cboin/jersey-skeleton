@@ -23,6 +23,7 @@ public class Seance {
 	private int couleurFond;
 	private int couleurPolice;
 
+
 	
 	
 	public Seance(){
