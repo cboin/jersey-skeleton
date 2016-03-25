@@ -18,10 +18,12 @@ edtControllers.controller('EDTController', ['$scope', function ($scope, $token) 
             center: 'title',
             right: 'month,agendaWeek,agendaDay'
         },
-        // defaultDate: '2015-09-01',
-        scrollTime: '08:00:00', //Determines how far down the scroll pane is initially scrolled down
-        // start: '10:00', // a start time
-        // end: '16:00', // an end time
+        scrollTime: '12:00:00', //Determines how far down the scroll pane is initially scrolled down
+
+
+        minTime: "08:00:00",
+        maxTime: "21:00:00",
+
         defaultView: 'agendaWeek',
         editable: false,
         eventLimit: true, // allow "more" link when too many events
@@ -30,6 +32,7 @@ edtControllers.controller('EDTController', ['$scope', function ($scope, $token) 
         eventTextColor: "black",
         eventBorderColor: "black",
         color: "lightgrey",
+        height:"auto",
         dayClick: function (date, jsEvent, view) {
 
             $('#calendar').fullCalendar('gotoDate', date);
