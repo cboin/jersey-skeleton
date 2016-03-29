@@ -79,6 +79,11 @@ edtControllers.controller('EDTController', function ($scope, $http) {
                         $('#calendar').fullCalendar('changeView', 'agendaDay');
 
                     },
+                    eventClick: function(calEvent, jsEvent, view) {
+                        $('#calendar').fullCalendar('removeEvents', function (event) {
+                            return event == calEvent;
+                        });
+                    },
                     // SlotEventOverlap : "false" ,
                     timeFormat: 'HH:mm'
                 });
