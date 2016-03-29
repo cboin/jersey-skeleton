@@ -29,7 +29,8 @@ public interface CoursDao {
 			"INNER JOIN ressources_profs ON ep.codeRessource = ressources_profs.codeProf\n" +
 			"INNER JOIN ressources_groupes ON seances_groupes.codeRessource = ressources_groupes.codeGroupe\n" +
 			"WHERE \n" +
-			"seances_groupes.codeRessource = :codeGroupe")
+			"seances_groupes.codeRessource = :codeGroupe AND\n" +
+			"seances.deleted = 0")
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	List<Cours> findByCodeGroupe(@Bind("codeGroupe") int codeGroupe);
 

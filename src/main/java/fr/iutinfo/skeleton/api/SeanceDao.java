@@ -45,4 +45,5 @@ public interface SeanceDao {
 	@SqlUpdate("create table seances (codeSeance integer primary key, dateSeance date, heureSeance integer, Enseignement varchar(255), Groupe varchar(100), Prof varchar(100))")
 	void createTable();
 
+
 }
