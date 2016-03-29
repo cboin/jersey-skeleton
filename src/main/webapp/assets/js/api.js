@@ -14,8 +14,15 @@ Loader = {
 
 
     loadComposantes: function () {
-        $.get("/v1/composantes", function(data){
-            alert(data);
+        $.get("/v1/composantes", function (data) {
+            Loader.vars.composantes = data;
+            createNotif("success", "Composantes chargées...");
+        })
+    },
+    loadProfs: function () {
+        $.get("/v1/profs", function (data) {
+            Loader.vars.profs = data;
+            createNotif("success", "Progs chargés...");
         })
     },
 

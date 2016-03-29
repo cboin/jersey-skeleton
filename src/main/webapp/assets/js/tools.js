@@ -3,6 +3,9 @@
  */
 function createNotif(type, message){
     $("#alertNotif").hide().removeClass('alert-danger, alert-success, alert-info, alert-warning').addClass('alert-'+type).html(message).removeClass('hidden').slideDown('slow');
+    setTimeout(function(){
+        $("#alertNotif").slideUp();
+    }, 3000);
 }
 
 
