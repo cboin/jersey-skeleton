@@ -42,6 +42,6 @@ public interface GroupeDao {
 
 	@SqlUpdate("delete from groupes where nom = :nom")
     @RegisterMapperFactory(BeanMapperFactory.class)
-	Groupe deleteGroupeWithName(@Bind("nom") String nom);
+	void deleteGroupeWithName(@Bind("nom") String nom);
 
 }
