@@ -27,16 +27,13 @@ public class SeanceDBResource {
 
 	@POST
 	@Path("/{codeSeance}/horaires")
-	@Consumes("application/x-www-form-urlencoded")
-	public void updateHoraires(@PathParam("codeSeance") int codeSeance, @FormParam("jour") String jour, @FormParam("heure") int heure, @FormParam("duree") int duree) {
+	public void updateHoraires(@PathParam("codeSeance") int codeSeance, EventDto event) {
 		Seance s = dao.findByCodeSeance(codeSeance);
 
 		if (s == null)
 			throw new WebApplicationException(404);
 
-		Date jour2 = new Date();
-
-		dao.updateHoraires(codeSeance, jour2, heure, duree);
+		dao.updateHoraires(codeSeance, event);
 	}
 
 

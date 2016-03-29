@@ -102,6 +102,52 @@ edtControllers.controller('EDTController', function ($scope, $http) {
 
         });
 
+
+        function changeHoraire (calEvent, jsEvent, ui, view) {
+            if (!EDITABLE) {
+                return;
+            }
+
+
+            var start = calEvent.start;
+            var end = calEvent.end;
+            console.log(typeof start);
+
+            // diff time
+            var s = end.format('X') * 1 - start.format('X') * 1;
+            var minutes = parseInt(s / 60);
+            var heures = parseInt(minutes / 60);
+            minutes = minutes % 60;
+
+            if (minutes < 10) {
+                minutes = "0" + minutes;
+            }
+
+            var duree = (heures + "" + minutes);
+
+
+            // format string
+            var heureDebut = start.format("H") + "" + start.format("mm");
+
+
+            var codeSeance = calEvent.data.codeSeance;
+
+            var d = {
+                date: start.format(),
+                heure: heureDebut,
+                duree: duree
+            };
+            console.log(d);
+
+            $http.post("/v1/seance/" + codeSeance + "/horaires", d, function (data) {
+                createNotif("success", "Séance modifiée !");
+            });
+
+        }
+
+
+
+
         // on affiche le calendrier en selectionnant la promo
         $('#calendar').fullCalendar({
             events: [],
@@ -173,7 +219,6 @@ edtControllers.controller('EDTController', function ($scope, $http) {
 
                     // suppression
                     $http.delete("/v1/seance/" + codeSeance).then(function (d) {
-                        alert("Deleted...");
                         createNotif("success", "Séance supprimée !");
                         $("#calendar").fullCalendar('removeEvents', codeSeance);
                         $("#calendar").fullCalendar('rerenderEvents');
@@ -188,40 +233,11 @@ edtControllers.controller('EDTController', function ($scope, $http) {
 
             },
 
-            eventDrop: function (calEvent, jsEvent, ui, view) {
-                if (!EDITABLE) {
-                    return;
-                }
-
-
-                var start = calEvent.start;
-                var end = calEvent.end;
-                console.log(typeof start);
-
-                // diff time
-                var s = end.format('X')*1 - start.format('X')*1;
-                var minutes = parseInt(s/60);
-                var heures = parseInt(minutes/60);
-                minutes=minutes%60;
-
-                if(minutes<10){
-                    minutes = "0" + minutes;
-                }
-
-                var duree= (heures +""+minutes);
-
-                var codeSeance = calEvent.data.codeSeance;
-
-                $http.post("/v1/seance/"+ codeSeance +"/horaires",  {
-                    jour: start.format(),
-                    heure: heures,
-                    duree: duree
-                }, function(data){
-                    console.log("SAVED");
-                });
-
-            },
-
+            /**
+             * En cas de changement d'horaire
+             */
+            eventDrop: changeHoraire,
+            eventResize: changeHoraire,
 
             selectable: true,
             editable: true,
@@ -262,7 +278,7 @@ edtControllers.controller('EDTController', function ($scope, $http) {
     })
 
 
-    $("[data-id='save']").off().on('click', function(){
+    $("[data-id='save']").off().on('click', function () {
 
     });
 

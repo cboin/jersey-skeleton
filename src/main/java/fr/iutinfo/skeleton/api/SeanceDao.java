@@ -29,14 +29,13 @@ public interface SeanceDao {
 	@SqlUpdate("DELETE FROM seances_groupes WHERE codeSeance = :codeSeance")
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	void deleteSeanceGroupeWithId(@Bind("codeSeance") int codeSeance);
-	
-	/*@SqlUpdate("insert into seances (codeSeance,dateSeance,heureSeance,dureeSeance,codeEnseignement)values (:codeSeance, :dateSeance, :heureSeance, :dureeSeance, :codeEnseignement)")
-	@GetGeneratedKeys
-	int insert(@BindBean() Seance seance);*/
+
+
 
 	void close();
 
-	@SqlUpdate("UPDATE seances SET dateSeance=:jour,  heureSeance=:heure, dureeSeance=:duree  WHERE codeSeance = :codeSeance")
-	void updateHoraires(int codeSeance, Date jour, int heure, int duree);
+
+	@SqlUpdate("UPDATE seances SET dateSeance=:date,  heureSeance=:heure, dureeSeance=:duree  WHERE codeSeance = :codeSeance")
+	void updateHoraires(@Bind("codeSeance") int codeSeance, @BindBean() EventDto eventDto);
 
 }
