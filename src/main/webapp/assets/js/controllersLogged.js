@@ -13,6 +13,8 @@ edtControllers.controller('LogController', ['$scope', function ($scope, $token) 
 edtControllers.controller('EDTController', function ($scope, $http) {
     changeTab("edt");
 
+    Loader.init($scope);
+
     $("#modalDialog").hide();
 
     /**
@@ -113,6 +115,17 @@ edtControllers.controller('EDTController', function ($scope, $http) {
             selectable: true,
             selectHelper: true,
             select: function (start, end) {
+
+                $scope.infos = {
+                    plageJour: start.format("DD/MM/YYYY") + " au " + end.format("DD/MM/YYYY"),
+                    plageHoraire: start.format("HH:mm") + " -> " + end.format("HH:mm"),
+                };
+                $scope.$apply();
+
+                $("#addSeance").modal('show');
+
+
+                /*
                 var title = prompt('Nom de l\'événement:');
                 var eventData;
                 if (title) {
@@ -122,8 +135,8 @@ edtControllers.controller('EDTController', function ($scope, $http) {
                         end: end
                     };
                     $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
-                }
-                $('#calendar').fullCalendar('unselect');
+                }*/
+              //  $('#calendar').fullCalendar('unselect');
             },
 
             /**

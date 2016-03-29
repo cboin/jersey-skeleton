@@ -3,12 +3,12 @@
 
     <label for="promotion"> Promo : </label>
 
-    <select name="promotion" id="promotion" ng-model="promos">
+    <select name="promotion" id="promotion" ng-model="selectPromo">
         <option value="none" selected="selected">Selectionnez une promo</option>
-        <option ng-repeat="option in promotions | filter:query" value="{{option.codeGroupe}}">{{option.nom}}</option>
+        <option ng-repeat="option in promotions | filter:queryGroupe" value="{{option.codeGroupe}}">{{option.nom}}</option>
     </select>
 
-    <input type="text" placeholder="Recherche..." ng-model="query" size="10" value="n4p2">
+    <input type="text" placeholder="Recherche..." ng-model="queryGroupe" size="10" value="n4p2">
 
     <br /><br />
 </div>
@@ -46,6 +46,59 @@
                 <button type="button" class="btn btn-primary">Editer</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
                 <button type="button" data-id="remove" class="btn btn-danger btn-sm left">Supprimer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="addSeance" tabindex="-1" role="dialog" aria-labelledby="ajouterUneSeance">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="ajouterUneSeance">
+                    Séance du {{ infos.plageJour }}
+                </h4>
+            </div>
+            <div class="modal-body">
+                <strong>De {{ infos.plageHoraire }}</strong><br /><br />
+
+                <label for="selectGroupe">Groupe :</label>
+                <select name="selectGroupe" ng-model="selectPromo">
+                    <option value="none" id="selectGroupe" selected="selected">Selectionnez un enseignement</option>
+                    <option ng-repeat="option in promotions | filter:promos" value="{{option.codeGroupe}}">{{ option.nom }}</option>
+                </select>
+
+                <input type="text" placeholder="Recherche..." ng-model="queryGroupe" size="10">
+                <br /><br />
+
+                <label for="selectEnseignement">Enseignement :</label>
+                <select name="selectEnseignement" ng-model="selectEnseignant">
+                    <option value="none" id="selectEnseignement" selected="selected">Selectionnez un enseignement</option>
+                    <option ng-repeat="option in loaderEnseignements | filter:queryEnseignement" value="{{option.codeGroupe}}">{{ option.nom }}</option>
+                </select>
+
+                <input type="text" placeholder="Recherche..." ng-model="queryEnseignement" size="10">
+                <br /><br />
+
+                <label for="selectEnseignant">Enseignant :</label>
+                <select name="selectEnseignant" ng-model="promos">
+                    <option value="none" id="selectEnseignant" selected="selected">Selectionnez un enseignant</option>
+                    <option ng-repeat="option in loadedProfs | filter:queryEnseignant" value="{{option.codeGroupe}}">{{ option.nom }}</option>
+                </select>
+
+                <input type="text" placeholder="Recherche..." ng-model="queryEnseignant" size="10">
+                <br /><br />
+
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                <button type="button" data-id="remove" class="btn btn-primary btn-sm left">Enregistrer</button>
             </div>
         </div>
     </div>
