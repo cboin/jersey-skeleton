@@ -41,8 +41,17 @@ public class GroupeDBResource {
 		return dao.all();
 	}
 	
+	@GET
+	@Path("/{codeGroupe}")
+	public Groupe getGroupeByCode(@PathParam("codeGroupe") int codeGroupe) {
+		Groupe g = dao.findByCode(codeGroupe);
+		if (g == null)
+			throw new WebApplicationException(404);
+		return g;
+	}
+	
 	 @GET
-		@Path("/{nom}")
+		@Path("/nom/{nom}")
 		public Groupe getGroupe(@PathParam("nom") String nom) {
 			Groupe groupe = dao.findByName(nom);
 			if (groupe == null) {
