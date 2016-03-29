@@ -23,15 +23,22 @@ Loader = {
         $.get("/v1/prof", function (data) {
             Loader.vars.profs = data;
             console.log("profs chargés...");
+            //Loader.loadEnseignements();
             Loader.loadEnseignements();
         })
     },
 
-    loadEnseignements: function () {
-        $.get("/v1/enseignements", function (data) {
+    /**
+     * On récupère les groupes pour le cours
+     * @param groupeId
+     */
+    loadEnseignements: function (groupeId) {
+        console.log("Fetch courses for " + groupeId);
+        $.get("/v1/enseignements/" + groupeId, function (data) {
             Loader.vars.enseignements = data;
             console.log("enseignements chargés...");
-            Loader.allLoaded();
+            Loader.scope.loadedEnseignements = Loader.vars.enseignements;
+
         })
     },
 
@@ -54,7 +61,6 @@ Loader = {
         // apply variables
         Loader.scope.loadedProfs = Loader.vars.profs;
         Loader.scope.loadedComposantes = Loader.vars.composantes;
-        Loader.scope.loadedEnseignements = Loader.vars.enseignements;
 
     },
 

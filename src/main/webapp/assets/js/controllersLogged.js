@@ -30,15 +30,15 @@ edtControllers.controller('EDTController', function ($scope, $http) {
             var groupeId = $(this).val();
 
 
-            EDITABLE=false;
+            EDITABLE = false;
 
-            if(groupeId === "none" || groupeId.length == 0){
+            if (groupeId === "none" || groupeId.length == 0) {
 
                 return;
             }
 
             $http.get('v1/cours/' + groupeId).success(function (dataCours) {
-                EDITABLE=true;
+                EDITABLE = true;
 
                 var l = dataCours.length;
 
@@ -75,14 +75,12 @@ edtControllers.controller('EDTController', function ($scope, $http) {
                     var endDate = date + endHour;
 
 
-
-
                     cours.start = startDate;
                     cours.end = endDate;
 
 
                     // plage horaire
-                    actuel.plageHoraire = startHour +" -> " + endHour;
+                    actuel.plageHoraire = startHour + " -> " + endHour;
 
 
                     /**
@@ -133,17 +131,17 @@ edtControllers.controller('EDTController', function ($scope, $http) {
                 $("#addSeance").modal('show');
 
                 /*
-                var title = prompt('Nom de l\'événement:');
-                var eventData;
-                if (title) {
-                    eventData = {
-                        title: title,
-                        start: start,
-                        end: end
-                    };
-                    $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
-                }*/
-              //  $('#calendar').fullCalendar('unselect');
+                 var title = prompt('Nom de l\'événement:');
+                 var eventData;
+                 if (title) {
+                 eventData = {
+                 title: title,
+                 start: start,
+                 end: end
+                 };
+                 $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+                 }*/
+                //  $('#calendar').fullCalendar('unselect');
             },
 
             /**
@@ -166,24 +164,22 @@ edtControllers.controller('EDTController', function ($scope, $http) {
 
                 $scope.$apply();
 
-                $('#modalInfos').modal({
+                $('#modalInfos').modal({});
 
-                });
-
-                $("[data-id='remove']").off().on('click', function(){
+                $("[data-id='remove']").off().on('click', function () {
 
                     // code seance
                     var codeSeance = calEvent.data.codeSeance;
 
                     // suppression
-                    $http.delete("/v1/seance/"+codeSeance).then(function(d){
+                    $http.delete("/v1/seance/" + codeSeance).then(function (d) {
                         alert("Deleted...");
                         createNotif("success", "Séance supprimée !");
                         $("#calendar").fullCalendar('removeEvents', codeSeance);
                         $("#calendar").fullCalendar('rerenderEvents');
 
-                    }, function(fail){
-                       createNotif("danger", "Impossible de supprimer la séance...");
+                    }, function (fail) {
+                        createNotif("danger", "Impossible de supprimer la séance...");
                     });
 
                     $("#modalInfos").modal('hide');
@@ -192,8 +188,8 @@ edtControllers.controller('EDTController', function ($scope, $http) {
 
             },
 
-            eventDrop: function(calEvent, jsEvent, ui, view){
-                if(!EDITABLE){
+            eventDrop: function (calEvent, jsEvent, ui, view) {
+                if (!EDITABLE) {
                     return;
                 }
 
@@ -221,7 +217,7 @@ edtControllers.controller('EDTController', function ($scope, $http) {
             height: "auto",
             dayClick: function (date, jsEvent, view) {
 
-              //  $('#calendar').fullCalendar('gotoDate', date);
+                //  $('#calendar').fullCalendar('gotoDate', date);
 //                $('#calendar').fullCalendar('changeView', 'agendaDay');
 
             },
@@ -230,6 +226,15 @@ edtControllers.controller('EDTController', function ($scope, $http) {
         });
 
     });
+
+
+    // Watch for promo change
+    $scope.$watch("selectPromo", function (newValue, oldValue) {
+        if (typeof newValue === 'undefined' || newValue === 'none') {
+            return;
+        }
+        Loader.loadEnseignements(newValue);
+    })
 
 
 });

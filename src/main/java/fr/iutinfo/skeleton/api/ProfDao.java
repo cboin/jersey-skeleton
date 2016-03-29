@@ -30,7 +30,27 @@ public interface ProfDao {
 
 
 
-	
+	@SqlQuery("SELECT\n" +
+			"enseignements.codeEnseignement,\n" +
+			"ressources_profs.nom,\n" +
+			"ressources_profs.prenom,\n" +
+			"enseignements.alias,\n" +
+			"enseignements.nom AS enseignement,\n" +
+			"ressources_profs.codeProf\n" +
+			"FROM\n" +
+			"enseignements\n" +
+			"INNER JOIN enseignements_profs ON enseignements.codeEnseignement = enseignements_profs.codeEnseignement\n" +
+			"INNER JOIN ressources_profs ON enseignements_profs.codeRessource = ressources_profs.codeProf\n" +
+			"WHERE\n" +
+			"enseignements.codeEnseignement = :codeEnseignement AND\n" +
+			"enseignements_profs.deleted = 0 AND\n" +
+			"enseignements_profs.deleted = 0\n")
+	@RegisterMapperFactory(BeanMapperFactory.class)
+	Prof getProfFromCours(@Bind("codeEnseignement") int codeEnseignement);
+
+
+
+
 
 	void close();
 

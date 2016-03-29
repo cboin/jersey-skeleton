@@ -2,10 +2,7 @@ package fr.iutinfo.skeleton.api;
 
 import java.util.List;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 import org.slf4j.Logger;
@@ -26,20 +23,20 @@ public class ProfDBResource {
 		 */
 	}
 
-	/*
-	 * @POST public Prof createProf(Prof prof) { prof.resetPasswordHash(); int
-	 * id = dao.insert(prof); user.setId(id); return prof; }
-	 * 
-	 * @GET
-	 * 
-	 * @Path("/{name}") public Prof getProf(@PathParam("name") String name) {
-	 * User user = dao.findByName(name); if (user == null) { throw new
-	 * WebApplicationException(404); } return user; }
-	 */
+
 
 	@GET
 	public List<Prof> getAllProfs() {
 		return dao.all();
 	}
+
+
+	@GET
+	@Path("/{codeEnseignement}")
+	public Prof getProfFromCours(@PathParam("codeSeance") int codeEnseignement) {
+		return dao.getProfFromCours(codeEnseignement);
+	}
+
+
 
 }

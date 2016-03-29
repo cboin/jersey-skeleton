@@ -17,7 +17,7 @@ public interface GroupeDao {
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	Groupe findByCodeGroupe(@Bind("codeGroupe") int codeGroupe);
 	
-	@SqlQuery("select * from groupes order by nom")
+	@SqlQuery("select * from ressources_groupes order by nom")
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	List<Groupe> all();
 
