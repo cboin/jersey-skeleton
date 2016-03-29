@@ -5,8 +5,11 @@ import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
 import org.slf4j.Logger;
@@ -20,28 +23,32 @@ public class GroupeDBResource {
 	final static Logger logger = LoggerFactory.getLogger(GroupeDBResource.class);
 
 	public GroupeDBResource() {
-		/*
-		 * try { dao.createProfTable(); dao.insert(new
-		 * Prof("codeProf","nom","prenom")); } catch (Exception e) {
-		 * System.out.println("Table déjà là !"); }
-		 */
+		
+	}
+	
+	@POST 
+	Groupe createGroupe(Groupe groupe) {
+        dao.insert(groupe);
+		return groupe;
 	}
 
-	/*
-	 * @POST public Prof createProf(Prof prof) { prof.resetPasswordHash(); int
-	 * id = dao.insert(prof); user.setId(id); return prof; }
-	 * 
-	 * @GET
-	 * 
-	 * @Path("/{name}") public Prof getProf(@PathParam("name") String name) {
-	 * User user = dao.findByName(name); if (user == null) { throw new
-	 * WebApplicationException(404); } return user; }
-	 */
+	
 
 	@GET
 	public List<Groupe> getAllGroupes() {
 		return dao.all();
 	}
+	
+	 @GET
+		@Path("/{nom}")
+		public Groupe getGroupe(@PathParam("nom") String nom) {
+			Groupe groupe = dao.findByName(nom);
+			if (groupe == null) {
+				throw new WebApplicationException(404);
+			}
+			return groupe;
+		}
+	    
 	
 	
 

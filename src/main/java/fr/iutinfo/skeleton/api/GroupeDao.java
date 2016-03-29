@@ -13,15 +13,31 @@ import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 public interface GroupeDao {
 	
 	
-	@SqlQuery("select * from ressources_groupes where codeGroupe= :codeGroupe")
+	@SqlQuery("select * from groupes where codeGroupe= :codeGroupe")
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	Groupe findByCodeGroupe(@Bind("codeGroupe") int codeGroupe);
 	
-	@SqlQuery("select * from ressources_groupes order by nom")
+	@SqlQuery("select * from groupes order by nom")
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	List<Groupe> all();
 
 
 	void close();
+
+	
+	@SqlUpdate("create table groupes (codeGroupe integer primary key autoincrement, nom varchar(100), alias varchar(100), identifiant integer)")
+	void createTable();
+
+	@SqlUpdate("drop table if exists groupes")
+	void dropTable();
+
+	
+	@SqlUpdate("insert into groupes (nom,alias,identifiant) values (:nom,:alias,:identifiant)")
+	@GetGeneratedKeys
+	Groupe insert(Groupe groupe);
+
+	@SqlQuery("select * from groupes where nom = :nom")
+    @RegisterMapperFactory(BeanMapperFactory.class)
+	Groupe findByName(@Bind("nom")String nom);
 
 }
