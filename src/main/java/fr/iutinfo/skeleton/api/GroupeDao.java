@@ -13,7 +13,7 @@ import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 public interface GroupeDao {
 	
 	
-	@SqlQuery("select * from groupes where codeGroupe= :codeGroupe")
+	@SqlQuery("select * from ressources_groupes where codeGroupe= :codeGroupe")
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	Groupe findByCodeGroupe(@Bind("codeGroupe") int codeGroupe);
 	
@@ -25,22 +25,26 @@ public interface GroupeDao {
 	void close();
 
 	
-	@SqlUpdate("create table groupes (codeGroupe integer primary key autoincrement, nom varchar(100), alias varchar(100), identifiant integer)")
+	@SqlUpdate("create table ressources_groupes (codeGroupe integer primary key autoincrement, nom varchar(100), alias varchar(100), identifiant integer)")
 	void createTable();
 
-	@SqlUpdate("drop table if exists groupes")
+	@SqlUpdate("drop table if exists ressources_groupes")
 	void dropTable();
+	
+	@SqlQuery("select * from ressources_groupes where codeGroupe = :codeGroupe")
+	@RegisterMapperFactory(BeanMapperFactory.class)
+	Groupe findByCode(@Bind("codeGroupe") int codeGroupe);
 
 	
-	@SqlUpdate("insert into groupes (nom,alias,identifiant) values (:nom,:alias,:identifiant)")
+	@SqlUpdate("insert into ressources_groupes (nom,alias,identifiant) values (:nom,:alias,:identifiant)")
 	@GetGeneratedKeys
 	int insert(@BindBean() Groupe groupe);
 
-	@SqlQuery("select * from groupes where nom = :nom")
+	@SqlQuery("select * from ressources_groupes where nom = :nom")
     @RegisterMapperFactory(BeanMapperFactory.class)
 	Groupe findByName(@Bind("nom")String nom);
 
-	@SqlUpdate("delete from groupes where nom = :nom")
+	@SqlUpdate("delete from ressources_groupes where nom = :nom")
     @RegisterMapperFactory(BeanMapperFactory.class)
 	void deleteGroupeWithName(@Bind("nom") String nom);
 
