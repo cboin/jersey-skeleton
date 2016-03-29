@@ -18,9 +18,7 @@ public class ComposanteDBResource {
 
 	}
 
-
 	@GET
-	@Path("/")
 	public List<Composante> getAll() {
 		return dao.all();
 	}

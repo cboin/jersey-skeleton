@@ -29,7 +29,7 @@ public class Groupe  {
     	
     }
 
-	public String getCouleurHex(){
+	public String buildCouleurHex(){
 		return "#" + (""+couleurFond).substring(2);
 	}
 

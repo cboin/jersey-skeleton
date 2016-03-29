@@ -1,9 +1,9 @@
 package fr.iutinfo.skeleton.api;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -26,9 +26,11 @@ public class GroupeDBResource {
 		
 	}
 	
-	@POST 
-	Groupe createGroupe(Groupe groupe) {
-        dao.insert(groupe);
+	@POST
+	public Groupe createGroupe(Groupe groupe) {
+        int id = dao.insert(groupe);
+        logger.debug("Groupe id : " + id);
+        groupe.setCodeGroupe(id);
 		return groupe;
 	}
 
@@ -49,6 +51,22 @@ public class GroupeDBResource {
 			return groupe;
 		}
 	    
+	@DELETE
+	@Path("/{nom}")
+	public Groupe deleteGroupe(@PathParam("nom") String nom) {
+		Groupe groupe = dao.findByName(nom);
+		if (groupe == null) {
+			throw new WebApplicationException(404);
+		}
+		
+		dao.deleteGroupeWithName(nom);
+		
+		return groupe;
+		
+	}
+	
+	
+	
 	
 	
 

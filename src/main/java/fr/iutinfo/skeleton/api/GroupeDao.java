@@ -34,10 +34,14 @@ public interface GroupeDao {
 	
 	@SqlUpdate("insert into groupes (nom,alias,identifiant) values (:nom,:alias,:identifiant)")
 	@GetGeneratedKeys
-	Groupe insert(Groupe groupe);
+	int insert(@BindBean() Groupe groupe);
 
 	@SqlQuery("select * from groupes where nom = :nom")
     @RegisterMapperFactory(BeanMapperFactory.class)
 	Groupe findByName(@Bind("nom")String nom);
+
+	@SqlUpdate("delete from groupes where nom = :nom")
+    @RegisterMapperFactory(BeanMapperFactory.class)
+	Groupe deleteGroupeWithName(@Bind("nom") String nom);
 
 }
