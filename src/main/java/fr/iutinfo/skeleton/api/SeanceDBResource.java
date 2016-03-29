@@ -1,5 +1,6 @@
 package fr.iutinfo.skeleton.api;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.*;
@@ -26,13 +27,16 @@ public class SeanceDBResource {
 
 	@POST
 	@Path("/{codeSeance}/horaires")
+	@Consumes("application/x-www-form-urlencoded")
 	public void updateHoraires(@PathParam("codeSeance") int codeSeance, @FormParam("jour") String jour, @FormParam("heure") int heure, @FormParam("duree") int duree) {
 		Seance s = dao.findByCodeSeance(codeSeance);
 
 		if (s == null)
 			throw new WebApplicationException(404);
 
-		dao.updateHoraires(codeSeance, jour, heure, duree);
+		Date jour2 = new Date();
+
+		dao.updateHoraires(codeSeance, jour2, heure, duree);
 	}
 
 

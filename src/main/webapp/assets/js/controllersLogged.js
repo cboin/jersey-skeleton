@@ -193,7 +193,32 @@ edtControllers.controller('EDTController', function ($scope, $http) {
                     return;
                 }
 
-                console.log(calEvent.start);
+
+                var start = calEvent.start;
+                var end = calEvent.end;
+                console.log(typeof start);
+
+                // diff time
+                var s = end.format('X')*1 - start.format('X')*1;
+                var minutes = parseInt(s/60);
+                var heures = parseInt(minutes/60);
+                minutes=minutes%60;
+
+                if(minutes<10){
+                    minutes = "0" + minutes;
+                }
+
+                var duree= (heures +""+minutes);
+
+                var codeSeance = calEvent.data.codeSeance;
+
+                $http.post("/v1/seance/"+ codeSeance +"/horaires",  {
+                    jour: start.format(),
+                    heure: heures,
+                    duree: duree
+                }, function(data){
+                    console.log("SAVED");
+                });
 
             },
 
