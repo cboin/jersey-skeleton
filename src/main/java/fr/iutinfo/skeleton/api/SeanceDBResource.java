@@ -24,6 +24,19 @@ public class SeanceDBResource {
 		return dao.all();
 	}
 
+	@POST
+	@Path("/{codeSeance}/horaires")
+	public void updateHoraires(@PathParam("codeSeance") int codeSeance, @FormParam("jour") String jour, @FormParam("heure") int heure, @FormParam("duree") int duree) {
+		Seance s = dao.findByCodeSeance(codeSeance);
+
+		if (s == null)
+			throw new WebApplicationException(404);
+
+		dao.updateHoraires(codeSeance, jour, heure, duree);
+	}
+
+
+
 	@DELETE
 	@Path("/{codeSeance}")
 	public void removeSeance(@PathParam("codeSeance") int codeSeance) {

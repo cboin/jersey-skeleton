@@ -1,5 +1,6 @@
 package fr.iutinfo.skeleton.api;
 
+import java.util.Date;
 import java.util.List;
 
 import org.skife.jdbi.v2.sqlobject.Bind;
@@ -11,11 +12,11 @@ import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapperFactory;
 import org.skife.jdbi.v2.tweak.BeanMapperFactory;
 
 public interface SeanceDao {
-	
+
 	@SqlQuery("select * from vueseances where codeSeance= :codeSeance")
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	Seance findByCodeSeance(@Bind("codeSeance") int codeSeance);
-	
+
 	@SqlQuery("select * from vueseances ")
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	List<Seance> all();
@@ -35,4 +36,7 @@ public interface SeanceDao {
 
 	void close();
 
-}	
+	@SqlUpdate("UPDATE seances SET dateSeance=:jour,  heureSeance=:heure, dureeSeance=:duree  WHERE codeSeance = :codeSeance")
+	void updateHoraires(int codeSeance, Date jour, int heure, int duree);
+
+}
