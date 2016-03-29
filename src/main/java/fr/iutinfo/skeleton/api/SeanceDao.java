@@ -14,12 +14,20 @@ public interface SeanceDao {
 	
 	@SqlQuery("select * from vueseances where codeSeance= :codeSeance")
 	@RegisterMapperFactory(BeanMapperFactory.class)
-	Groupe findByCodeSeance(@Bind("codeSeance") int codeSeance);
+	Seance findByCodeSeance(@Bind("codeSeance") int codeSeance);
 	
 	@SqlQuery("select * from vueseances ")
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	List<Seance> all();
 
+
+	@SqlUpdate("DELETE FROM seances WHERE codeSeance = :codeSeance")
+	@RegisterMapperFactory(BeanMapperFactory.class)
+	void deleteSeanceWithId(@Bind("codeSeance") int codeSeance);
+
+	@SqlUpdate("DELETE FROM seances_groupes WHERE codeSeance = :codeSeance")
+	@RegisterMapperFactory(BeanMapperFactory.class)
+	void deleteSeanceGroupeWithId(@Bind("codeSeance") int codeSeance);
 	
 	/*@SqlUpdate("insert into seances (codeSeance,dateSeance,heureSeance,dureeSeance,codeEnseignement)values (:codeSeance, :dateSeance, :heureSeance, :dureeSeance, :codeEnseignement)")
 	@GetGeneratedKeys

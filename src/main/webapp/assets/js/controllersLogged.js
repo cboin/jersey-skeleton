@@ -237,4 +237,9 @@ edtControllers.controller('EDTController', function ($scope, $http) {
     })
 
 
+    $("[data-id='save']").off().on('click', function(){
+
+    });
+
+
 });

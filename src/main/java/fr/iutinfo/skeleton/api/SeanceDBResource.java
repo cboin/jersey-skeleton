@@ -2,10 +2,7 @@ package fr.iutinfo.skeleton.api;
 
 import java.util.List;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 import org.slf4j.Logger;
@@ -20,11 +17,24 @@ public class SeanceDBResource {
 
 	public SeanceDBResource() {
 		
-	}	
+	}
 
 	@GET
 	public List<Seance> getAllSeances() {
 		return dao.all();
 	}
+
+	@DELETE
+	@Path("/{codeSeance}")
+	public void removeSeance(@PathParam("codeSeance") int codeSeance) {
+		Seance s = dao.findByCodeSeance(codeSeance);
+
+		if (s == null)
+			throw new WebApplicationException(404);
+
+		dao.deleteSeanceWithId(codeSeance);
+		dao.deleteSeanceGroupeWithId(codeSeance);
+	}
+
 
 }

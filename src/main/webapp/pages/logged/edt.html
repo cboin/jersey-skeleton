@@ -100,7 +100,7 @@
                 <select name="selectEnseignement" id="selectEnseignement"  ng-model="selectEnseignements">
                     <option value="none" selected="selected">Selectionnez un enseignement</option>
 
-                    <option ng-repeat="option in loadedEnseignements | filter:queryEnseignement" value="{{option.codeEnseignement}}">{{ option.alias }} ( {{ option.nom }} ) par {{option.nomProf}}</option>
+                    <option ng-repeat="option in loadedEnseignements | filter:queryEnseignement" value="{{option.codeEnseignement}}">{{ option.alias }} ( {{ option.nom }} ) par {{option.profNom}}</option>
 
                 </select>
 
@@ -118,7 +118,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                <button type="button" data-id="remove" class="btn btn-primary btn-sm left">Enregistrer</button>
+                <button type="button" data-id="save" class="btn btn-primary btn-sm left">Enregistrer</button>
             </div>
         </div>
     </div>
