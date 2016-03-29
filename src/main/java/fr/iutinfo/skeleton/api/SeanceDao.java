@@ -38,4 +38,6 @@ public interface SeanceDao {
 	@SqlUpdate("UPDATE seances SET dateSeance=:date,  heureSeance=:heure, dureeSeance=:duree  WHERE codeSeance = :codeSeance")
 	void updateHoraires(@Bind("codeSeance") int codeSeance, @BindBean() EventDto eventDto);
 
+	void ajouterSeance();
+
 }
