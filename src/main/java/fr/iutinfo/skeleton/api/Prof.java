@@ -12,14 +12,16 @@ public class Prof {
     private String nom;
     private String prenom;
     private String alias;
+	private int codeComposante;
    
 
 
-    public Prof(int codeProf, String nom , String prenom) {
+    public Prof(int codeProf, String nom , String prenom, int codeComposante) {
         this.codeProf = codeProf;
         this.nom = nom;
         this.prenom = prenom;
-    }
+		this.codeComposante = codeComposante;
+	}
 
 
     public Prof() {
@@ -75,7 +77,11 @@ public class Prof {
 		this.alias = alias;
 	}
 
- 
+	public int getCodeComposante() {
+		return codeComposante;
+	}
 
-	
+	public void setCodeComposante(int codeComposante) {
+		this.codeComposante = codeComposante;
+	}
 }

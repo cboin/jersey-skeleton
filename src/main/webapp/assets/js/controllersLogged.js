@@ -42,11 +42,8 @@ edtControllers.controller('EDTController', function ($scope, $http) {
                     var actuel = dataCours[i];
                     var cours = {};
 
-                    /**
-                     * On save les différentes données transmises
-                     */
-                    cours.data = actuel;
-
+                    cours.codeSeance = actuel.codeSeance;
+                    cours.id = actuel.codeSeance;
 
                     /**
                      * Basic
@@ -60,16 +57,32 @@ edtControllers.controller('EDTController', function ($scope, $http) {
                     var date = actuel.dateSeance.substr(0, 11);
 
 
-                    var startDate = date + returnHour(actuel.heureSeance);
-                    var endDate = date + addHour(actuel.heureSeance, actuel.dureeSeance);
+                    var startHour = returnHour(actuel.heureSeance);
+                    var startDate = date + startHour;
+
+                    var endHour = addHour(actuel.heureSeance, actuel.dureeSeance);
+                    var endDate = date + endHour;
+
+
 
 
                     cours.start = startDate;
                     cours.end = endDate;
 
 
+                    // plage horaire
+                    actuel.plageHoraire = startHour +" -> " + endHour;
+
+
+                    /**
+                     * On save les différentes données transmises
+                     */
+                    cours.data = actuel;
+
+
                     allCours.push(cours);
                 }
+
                 $("#calendar").fullCalendar('addEventSource', allCours, true);
 
                 $("#calendar").fullCalendar('rerenderEvents');
@@ -122,19 +135,44 @@ edtControllers.controller('EDTController', function ($scope, $http) {
             eventClick: function (calEvent, jsEvent, view) {
 
                 $("#modalDialog").hide();
-                console.log(calEvent.data);
-
-                $scope.$texte = "TRUCCMUCHE";
+                console.log(calEvent);
 
                 $scope.infos = calEvent.data;
 
                 $scope.$apply();
 
-                $("#modalDialog").dialog({
-                    modal: true
+                $('#modalInfos').modal({
+
+                });
+
+                $("[data-id='remove']").off().on('click', function(){
+
+                    // code seance
+                    var codeSeance = calEvent.data.codeSeance;
+
+                    // suppression
+                    $http.delete("/v1/seance/"+codeSeance).then(function(d){
+                        alert("Deleted...");
+                        createNotif("success", "Séance supprimée !");
+                        $("#calendar").fullCalendar('removeEvents', codeSeance);
+                        $("#calendar").fullCalendar('rerenderEvents');
+
+                    }, function(fail){
+                       createNotif("danger", "Impossible de supprimer la séance...");
+                    });
+
+                    $("#modalInfos").modal('hide');
+
                 });
 
             },
+
+            eventDrop: function(calEvent, jsEvent, ui, view){
+
+                console.log(calEvent.start);
+
+            },
+
 
             editable: true,
             eventLimit: true,
@@ -166,57 +204,3 @@ edtControllers.controller('EDTController', function ($scope, $http) {
 
 
 });
-
-
-function returnHour(string) {
-    if (typeof string === "undefined") {
-        console.error("erreur indefinie");
-        return "000000";
-    }
-
-    string = "" + string;
-
-    if (string.length == 3) {
-        return "0" + string.substring(0, 1) + ":" + string.substring(1, 3) + ":00";
-    }
-    return string.substring(0, 2) + ":" + string.substring(2, 4) + ":00";
-}
-
-
-function addHour(string, duree) {
-
-    string = "" + string;
-    duree = "" + duree;
-
-    var h = "" + (string * 1 + duree * 1);
-    var heure = 0;
-    var minutes = 0;
-
-    if (h.length == 3) {
-        heure = h.substring(0, 1) * 1;
-        minutes = h.substring(1, 3) * 1;
-    } else {
-        heure = h.substring(0, 2) * 1;
-
-        minutes = h.substring(2, 4) * 1;
-    }
-
-    heure += parseInt(minutes / 60);
-    minutes = minutes % 60;
-
-
-    if (heure < 10) {
-        heure = "0" + heure;
-    }
-    if (minutes < 10) {
-        minutes = "0" + minutes;
-    }
-
-    return heure + ":" + minutes + ":00";
-}
-
-
-function changeTab(name) {
-    $(".active[data-lien]").removeClass('active');
-    $("[data-lien='" + name + "']").addClass('active');
-}

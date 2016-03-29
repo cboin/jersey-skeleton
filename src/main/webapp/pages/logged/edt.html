@@ -8,7 +8,7 @@
         <option ng-repeat="option in promotions | filter:query" value="{{option.codeGroupe}}">{{option.nom}}</option>
     </select>
 
-    <input type="text" placeholder="Recherche..." ng-model="query" size="10">
+    <input type="text" placeholder="Recherche..." ng-model="query" size="10" value="n4p2">
 
     <br /><br />
 </div>
@@ -24,13 +24,29 @@
 
 
 <!-- Modal -->
-<div id="modalDialog" title="Informations...">
-    {{ texte }}
-    <strong>IdSeance : </strong> <span id="modal_seanceid">{{ infos.data.codeSeance }}</span><br />
-    <strong>GROUPE : </strong> <span id="modal_groupe">{{ infos.nomGroupe }}</span><br />
-    <strong>PROF : </strong> <span id="modal_prof">{{ infos.nomProf }}</span><br />
-    <strong>COURS : </strong> <span id="modal_cours">{{ infos.alias }}</span><br />
-    <strong>SALLE : </strong> <span id="modal_salle">{{ infos.salle }}</span><br />
+<div class="modal fade" id="modalInfos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">
+                    {{ infos.plageHoraire }}
+                </h4>
+            </div>
+            <div class="modal-body">
+                <strong>IdSeance : </strong> <span id="modal_seanceid">{{ infos.codeSeance }}</span><br />
+                <strong>GROUPE : </strong> <span id="modal_groupe">{{ infos.nomGroupe }}</span><br />
+                <strong>PROF : </strong> <span id="modal_prof">{{ infos.nomProf }}</span><br />
+                <strong>COURS : </strong> <span id="modal_cours">{{ infos.alias }}</span><br />
+                <strong>SALLE : </strong> <span id="modal_salle">{{ infos.salle }}</span><br />
 
 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Editer</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                <button type="button" data-id="remove" class="btn btn-danger btn-sm left">Supprimer</button>
+            </div>
+        </div>
+    </div>
 </div>
