@@ -20,7 +20,11 @@ public interface SeanceDao {
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	List<Seance> all();
 
+	
+	/*@SqlUpdate("insert into seances (codeSeance,dateSeance,heureSeance,dureeSeance,codeEnseignement)values (:codeSeance, :dateSeance, :heureSeance, :dureeSeance, :codeEnseignement)")
+	@GetGeneratedKeys
+	int insert(@BindBean() Seance seance);*/
 
 	void close();
 
-}
+}	

@@ -1,12 +1,15 @@
 package fr.iutinfo.skeleton.api;
 
+import java.security.Principal;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-public class Groupe {
+public class Groupe  {
     final static Logger logger = LoggerFactory.getLogger(Groupe.class);
 
+   
     private int codeGroupe;
     private int couleurFond;
     private String nom;
@@ -26,7 +29,7 @@ public class Groupe {
     	
     }
 
-	public String getCouleurHex(){
+	public String buildCouleurHex(){
 		return "#" + (""+couleurFond).substring(2);
 	}
 
@@ -70,7 +73,5 @@ public class Groupe {
 			this.identifiant = identifiant;
 	}
 	
- 
-
 	
 }
