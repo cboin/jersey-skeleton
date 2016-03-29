@@ -1,8 +1,3 @@
-function doRemove(codeSeance) {
-    alert(codeSeance + " removed!");
-}
-
-
 /**
  * First class which is called
  */
@@ -19,23 +14,23 @@ Loader = {
     loadComposantes: function () {
         $.get("/v1/composantes", function (data) {
             Loader.vars.composantes = data;
-            createNotif("success", "Composantes chargées...");
-            Loader.allLoaded();
+            console.log("composantes chargées...");
+            Loader.loadProfs();
 
-        })
+        });
     },
     loadProfs: function () {
         $.get("/v1/prof", function (data) {
             Loader.vars.profs = data;
-            createNotif("success", "Profs chargés...");
-            Loader.allLoaded();
+            console.log("profs chargés...");
+            Loader.loadEnseignements();
         })
     },
 
     loadEnseignements: function () {
         $.get("/v1/enseignements", function (data) {
-            Loader.vars.profs = data;
-            createNotif("success", "Enseignements chargés...");
+            Loader.vars.enseignements = data;
+            console.log("enseignements chargés...");
             Loader.allLoaded();
         })
     },
@@ -45,25 +40,22 @@ Loader = {
 
         // load composantes
         Loader.loadComposantes();
-        Loader.loadProfs();
-        Loader.loadEnseignements();
     },
 
 
     scope: null,
+
     /**
      * Callback when all things are loaded
      * @param $scope
      */
     allLoaded: function () {
-        Loader.nbLoaded++;
-        if (Loader.nbLoaded >= 3) {
-            // apply variables
-            Loader.scope.loadedProfs = Loader.vars.profs;
-            Loader.scope.loadedComposantes = Loader.vars.composantes;
-            Loader.scope.loadedEnseignments = Loader.vars.enseignements;
+        createNotif("success", "Composants chargés.");
+        // apply variables
+        Loader.scope.loadedProfs = Loader.vars.profs;
+        Loader.scope.loadedComposantes = Loader.vars.composantes;
+        Loader.scope.loadedEnseignements = Loader.vars.enseignements;
 
-        }
     },
 
 };

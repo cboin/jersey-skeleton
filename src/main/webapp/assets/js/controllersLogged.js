@@ -15,6 +15,8 @@ edtControllers.controller('EDTController', function ($scope, $http) {
 
     Loader.init($scope);
 
+    var EDITABLE = false;
+
     $("#modalDialog").hide();
 
     /**
@@ -27,9 +29,16 @@ edtControllers.controller('EDTController', function ($scope, $http) {
 
             var groupeId = $(this).val();
 
-            $http.get('v1/cours/' + groupeId).success(function (dataCours) {
 
-                console.log(dataCours);
+            EDITABLE=false;
+
+            if(groupeId === "none" || groupeId.length == 0){
+
+                return;
+            }
+
+            $http.get('v1/cours/' + groupeId).success(function (dataCours) {
+                EDITABLE=true;
 
                 var l = dataCours.length;
 
@@ -112,7 +121,6 @@ edtControllers.controller('EDTController', function ($scope, $http) {
             defaultView: 'agendaWeek',
             hiddenDays: [0],
 
-            selectable: true,
             selectHelper: true,
             select: function (start, end) {
 
@@ -123,7 +131,6 @@ edtControllers.controller('EDTController', function ($scope, $http) {
                 $scope.$apply();
 
                 $("#addSeance").modal('show');
-
 
                 /*
                 var title = prompt('Nom de l\'événement:');
@@ -146,6 +153,11 @@ edtControllers.controller('EDTController', function ($scope, $http) {
              * @param view
              */
             eventClick: function (calEvent, jsEvent, view) {
+                if (!EDITABLE) {
+                    return;
+                }
+
+                console.log($scope.loadedEnseignements);
 
                 $("#modalDialog").hide();
                 console.log(calEvent);
@@ -181,12 +193,16 @@ edtControllers.controller('EDTController', function ($scope, $http) {
             },
 
             eventDrop: function(calEvent, jsEvent, ui, view){
+                if(!EDITABLE){
+                    return;
+                }
 
                 console.log(calEvent.start);
 
             },
 
 
+            selectable: true,
             editable: true,
             eventLimit: true,
 

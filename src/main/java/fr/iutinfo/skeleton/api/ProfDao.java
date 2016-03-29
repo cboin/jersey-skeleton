@@ -29,6 +29,9 @@ public interface ProfDao {
 	List<Prof> all();
 
 
+
+	
+
 	void close();
 
 }

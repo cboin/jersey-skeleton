@@ -1,14 +1,35 @@
 <div class="row">
     <h1>Emploi du temps</h1>
 
-    <label for="promotion"> Promo : </label>
+    <table>
+        <tr>
+            <td>
+                <label for="promotion"> Promo : </label>
+            </td>
+            <td>
+                <select name="promotion" id="promotion" ng-model="selectPromo" style="min-width: 200px;">
+                    <option value="none">Faites un choix</option>
+                    <option ng-repeat="option in promotions | filter:queryGroupe" value="{{option.codeGroupe}}">{{option.nom}}</option>
+                </select>
+                <input type="text" placeholder="Recherche..." ng-model="queryGroupe" size="10" value="n4p2">
+            </td>
+        </tr>
 
-    <select name="promotion" id="promotion" ng-model="selectPromo">
-        <option value="none" selected="selected">Selectionnez une promo</option>
-        <option ng-repeat="option in promotions | filter:queryGroupe" value="{{option.codeGroupe}}">{{option.nom}}</option>
-    </select>
+        <tr>
+            <td>
+                <label for="composante"> Composante : </label>
+            </td>
+            <td>
+                <select name="composante" id="composante" ng-model="selectComposante" style="min-width: 200px;">
+                    <option value="none">Faites un choix</option>
+                    <option ng-repeat="option in loadedComposantes | filter:queryComposante" value="{{option.codeComposante}}">{{option.nom}}</option>
+                </select>
+                <input type="text" placeholder="Recherche..." ng-model="queryComposante" size="10" value="n4p2">
+            </td>
+        </tr>
 
-    <input type="text" placeholder="Recherche..." ng-model="queryGroupe" size="10" value="n4p2">
+   </table>
+
 
     <br /><br />
 </div>
@@ -74,19 +95,23 @@
                 <input type="text" placeholder="Recherche..." ng-model="queryGroupe" size="10">
                 <br /><br />
 
+
                 <label for="selectEnseignement">Enseignement :</label>
-                <select name="selectEnseignement" ng-model="selectEnseignant">
-                    <option value="none" id="selectEnseignement" selected="selected">Selectionnez un enseignement</option>
-                    <option ng-repeat="option in loaderEnseignements | filter:queryEnseignement" value="{{option.codeGroupe}}">{{ option.nom }}</option>
+                <select name="selectEnseignement" id="selectEnseignement"  ng-model="selectEnseignements">
+                    <option value="none" selected="selected">Selectionnez un enseignement</option>
+
+                    <option ng-repeat="option in loadedEnseignements | filter:queryEnseignement" value="{{option.codeEnseignement}}">{{ option.alias }} ({{ option.nom }})</option>
+
                 </select>
 
                 <input type="text" placeholder="Recherche..." ng-model="queryEnseignement" size="10">
                 <br /><br />
 
+
                 <label for="selectEnseignant">Enseignant :</label>
-                <select name="selectEnseignant" ng-model="promos">
+                <select name="selectEnseignant" ng-model="selectEnseignants">
                     <option value="none" id="selectEnseignant" selected="selected">Selectionnez un enseignant</option>
-                    <option ng-repeat="option in loadedProfs | filter:queryEnseignant" value="{{option.codeGroupe}}">{{ option.nom }}</option>
+                    <option ng-repeat="option in loadedProfs | filter:queryEnseignant" value="{{option.codeGroupe}}">{{ option.nom }} {{ option.prenom }}</option>
                 </select>
 
                 <input type="text" placeholder="Recherche..." ng-model="queryEnseignant" size="10">
@@ -103,3 +128,4 @@
         </div>
     </div>
 </div>
+
