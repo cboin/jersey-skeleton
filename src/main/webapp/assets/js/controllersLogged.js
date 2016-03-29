@@ -13,6 +13,7 @@ edtControllers.controller('LogController', ['$scope', function ($scope, $token) 
 edtControllers.controller('EDTController', function ($scope, $http) {
     changeTab("edt");
 
+    $("#modalDialog").hide();
 
     /**
      * Promotions
@@ -20,12 +21,13 @@ edtControllers.controller('EDTController', function ($scope, $http) {
     $http.get('v1/groupe').success(function (data) {
         $scope.promotions = data;
 
-
         $("#promotion").change(function () {
 
             var groupeId = $(this).val();
 
             $http.get('v1/cours/' + groupeId).success(function (dataCours) {
+
+                console.log(dataCours);
 
                 var l = dataCours.length;
 
@@ -40,6 +42,16 @@ edtControllers.controller('EDTController', function ($scope, $http) {
                     var actuel = dataCours[i];
                     var cours = {};
 
+                    /**
+                     * On save les différentes données transmises
+                     */
+                    cours.data = actuel;
+
+
+                    /**
+                     * Basic
+                     * @type {string}
+                     */
                     cours.title = actuel.nomGroupe + "\n" +
                         actuel.alias + "\n\n" +
                         actuel.nomProf + " - SALLE";
@@ -55,14 +67,12 @@ edtControllers.controller('EDTController', function ($scope, $http) {
                     cours.start = startDate;
                     cours.end = endDate;
 
-                    // $("#calendar").fullCalendar('renderEvent', cours, true);
 
-                   allCours.push(cours);
+                    allCours.push(cours);
                 }
                 $("#calendar").fullCalendar('addEventSource', allCours, true);
 
                 $("#calendar").fullCalendar('rerenderEvents');
-
 
 
             });
@@ -102,6 +112,30 @@ edtControllers.controller('EDTController', function ($scope, $http) {
                 }
                 $('#calendar').fullCalendar('unselect');
             },
+
+            /**
+             * Click on event
+             * @param calEvent
+             * @param jsEvent
+             * @param view
+             */
+            eventClick: function (calEvent, jsEvent, view) {
+
+                $("#modalDialog").hide();
+                console.log(calEvent.data);
+
+                $scope.$texte = "TRUCCMUCHE";
+
+                $scope.infos = calEvent.data;
+
+                $scope.$apply();
+
+                $("#modalDialog").dialog({
+                    modal: true
+                });
+
+            },
+
             editable: true,
             eventLimit: true,
 
@@ -120,8 +154,8 @@ edtControllers.controller('EDTController', function ($scope, $http) {
             height: "auto",
             dayClick: function (date, jsEvent, view) {
 
-                $('#calendar').fullCalendar('gotoDate', date);
-                $('#calendar').fullCalendar('changeView', 'agendaDay');
+              //  $('#calendar').fullCalendar('gotoDate', date);
+//                $('#calendar').fullCalendar('changeView', 'agendaDay');
 
             },
             // SlotEventOverlap : "false" ,

@@ -26,6 +26,7 @@
 					<target>1.7</target>
 				</configuration>
 			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
@@ -35,19 +36,24 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
+
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>9.3.0.M2</version>
 				<configuration>
-					<scanIntervalSeconds>5</scanIntervalSeconds>
+					<scanIntervalSeconds>1</scanIntervalSeconds>
 					<war>${project.basedir}/target/${project.artifactId}.war</war>
 					<webApp>
 						<webInfIncludeJarPattern>^$</webInfIncludeJarPattern>
 						<containerIncludeJarPattern>^$</containerIncludeJarPattern>
+
 					</webApp>
+
+
 				</configuration>
 			</plugin>
+
 		</plugins>
 	</build>
 
