@@ -55,4 +55,9 @@ public interface SeanceDao {
 	void createTable();
 
 
+	@SqlUpdate("UPDATE seances SET codeEnseignement=:codeEnseignement WHERE codeSeance = :codeSeance")
+	void updateCodeEnseignement(@Bind("codeSeance") int codeSeance, @BindBean() SeanceDto event);
+
+	@SqlUpdate("UPDATE seances_groupes SET codeRessource=:codeGroupe WHERE codeSeance = :codeSeance")
+	void updateCodeGroupe(@Bind("codeSeance") int codeSeance, @BindBean() SeanceDto event);
 }

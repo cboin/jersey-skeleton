@@ -20,11 +20,60 @@ edtControllers.controller('EDTController', function ($scope, $http) {
     $("#modalDialog").hide();
 
     /**
+     * Convertit un cours pour calendar io
+     * @param actuel
+     * @returns {{}}
+     */
+    function convertCours(actuel) {
+        var cours = {};
+        cours.codeSeance = actuel.codeSeance;
+        cours.id = actuel.codeSeance;
+
+        /**
+         * Basic
+         * @type {string}
+         */
+        cours.title = actuel.nomGroupe + "\n" +
+            actuel.alias + "\n\n" +
+            actuel.nomProf + " - SALLE";
+
+
+        var date = actuel.dateSeance.substr(0, 11);
+
+
+        var startHour = returnHour(actuel.heureSeance);
+        var startDate = date + startHour;
+
+        var endHour = addHour(actuel.heureSeance, actuel.dureeSeance);
+        var endDate = date + endHour;
+
+
+        cours.start = startDate;
+        cours.end = endDate;
+
+
+        // plage horaire
+        actuel.plageHoraire = startHour + " -> " + endHour;
+
+
+        /**
+         * On save les différentes données transmises
+         */
+        cours.data = actuel;
+
+        var c = "" + actuel.couleurFond;
+        var bg = "#" + (c).substr(c.length - 6, c.length)
+        cours.backgroundColor = bg;
+        cours.textColor = "#FFFFFF";
+
+        return cours;
+    }
+
+    /**
      * Promotions
      */
     $http.get('v1/groupe').success(function (data) {
         $scope.promotions = data;
-        console.log(data);
 
         $("#promotion").change(function () {
 
@@ -40,7 +89,7 @@ edtControllers.controller('EDTController', function ($scope, $http) {
 
             $http.get('v1/cours/' + groupeId).success(function (dataCours) {
                 EDITABLE = true;
-
+                console.log(dataCours);
                 var l = dataCours.length;
 
 
@@ -52,42 +101,7 @@ edtControllers.controller('EDTController', function ($scope, $http) {
 
                 for (var i = 0; i < l; i++) {
                     var actuel = dataCours[i];
-                    var cours = {};
-
-                    cours.codeSeance = actuel.codeSeance;
-                    cours.id = actuel.codeSeance;
-
-                    /**
-                     * Basic
-                     * @type {string}
-                     */
-                    cours.title = actuel.nomGroupe + "\n" +
-                        actuel.alias + "\n\n" +
-                        actuel.nomProf + " - SALLE";
-
-
-                    var date = actuel.dateSeance.substr(0, 11);
-
-
-                    var startHour = returnHour(actuel.heureSeance);
-                    var startDate = date + startHour;
-
-                    var endHour = addHour(actuel.heureSeance, actuel.dureeSeance);
-                    var endDate = date + endHour;
-
-
-                    cours.start = startDate;
-                    cours.end = endDate;
-
-
-                    // plage horaire
-                    actuel.plageHoraire = startHour + " -> " + endHour;
-
-
-                    /**
-                     * On save les différentes données transmises
-                     */
-                    cours.data = actuel;
+                    var cours = convertCours(actuel);
 
 
                     allCours.push(cours);
@@ -138,7 +152,6 @@ edtControllers.controller('EDTController', function ($scope, $http) {
                 heure: heureDebut,
                 duree: duree
             };
-            console.log(d);
 
             $http.post("/v1/seance/" + codeSeance + "/horaires", d, function (data) {
                 createNotif("success", "Séance modifiée !");
@@ -177,8 +190,7 @@ edtControllers.controller('EDTController', function ($scope, $http) {
 
 
                 $("[data-id='save']").off().on('click', function () {
-                    console.log("Trying to save...");
-
+                    console.log("SAVED");
                     // diff time
                     var s = end.format('X') * 1 - start.format('X') * 1;
                     var minutes = parseInt(s / 60);
@@ -205,29 +217,24 @@ edtControllers.controller('EDTController', function ($scope, $http) {
                         codeGroupe: codeGroupe,
                         dureeSeance: duree
                     };
-                    console.log(d);
 
 
-                    $http.post("/v1/seance/add", d, function (data) {
+                    $http.post("/v1/seance/add", d).then(function (idS) {
+                        console.log("Callback");
+                        var coursData = idS.data;
+                        var cours = convertCours(coursData);
+                        console.log(cours);
+
+                        $('#calendar').fullCalendar('renderEvent', cours, true);
+                        $("#addSeance").modal('hide');
+
+
                         createNotif("success", "Séance ajoutée !");
+                    }, function () {
                     });
 
 
                 });
-
-
-                /*
-                 var title = prompt('Nom de l\'événement:');
-                 var eventData;
-                 if (title) {
-                 eventData = {
-                 title: title,
-                 start: start,
-                 end: end
-                 };
-                 $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
-                 }*/
-                //  $('#calendar').fullCalendar('unselect');
             },
 
             /**
@@ -241,10 +248,11 @@ edtControllers.controller('EDTController', function ($scope, $http) {
                     return;
                 }
 
-                console.log($scope.loadedEnseignements);
+                var start = calEvent.start;
+                var end = calEvent.end;
+
 
                 $("#modalDialog").hide();
-                console.log(calEvent);
 
                 $scope.infos = calEvent.data;
 
@@ -268,6 +276,64 @@ edtControllers.controller('EDTController', function ($scope, $http) {
                     });
 
                     $("#modalInfos").modal('hide');
+
+                });
+
+                $("[data-id='edit']").off().on('click', function () {
+
+                    // code seance
+                    var codeSeance = calEvent.data.codeSeance;
+
+
+                    // maj
+                    $scope.infos = {
+                        plageJour: start.format("DD/MM/YYYY") + " au " + end.format("DD/MM/YYYY"),
+                        plageHoraire: start.format("HH:mm") + " -> " + end.format("HH:mm"),
+                    };
+                    $scope.$apply();
+
+
+                    $("#selectEnseignement").val(calEvent.data.codeEnseignement);
+                    $("#addSeance").modal('show');
+
+
+                    $("[data-id='save']").off().on('click', function () {
+
+
+                        var codeEnseignement = $("#selectEnseignement").val();
+                        var codeGroupe = calEvent.data.codeGroupe;
+
+
+                        var d = {
+                            codeSeance: codeSeance,
+                            codeEnseignement: codeEnseignement,
+                            codeGroupe: codeGroupe
+                        };
+
+
+                        $http.put("/v1/seance/" + codeSeance + "/update", d).then(function (d) {
+                            console.log(d);
+                            $("#calendar").fullCalendar('removeEvents', codeSeance);
+                            $("#addSeance").modal('hide');
+                            $("#modalInfos").modal('hide');
+
+                            var cours = d.data;
+                            var codeGroupe = $("#promotion").val();
+
+                            if(codeGroupe != cours.codeGroupe){
+                                createNotif("info", "Le cours a été attribué à un autre groupe.");
+                            }
+                            else {
+                                var cou = convertCours(cours);
+
+                                $('#calendar').fullCalendar('renderEvent', cou, true);
+                                createNotif("success", "Cours modifié.");
+                            }
+
+                        }, function () {
+                        });
+
+                    });
 
                 });
 

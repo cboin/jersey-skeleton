@@ -27,12 +27,19 @@ public class SeanceDBResource {
 
 	@POST
 	@Path("/add")
-	public void createSeance(SeanceDto event) {
+	public Cours createSeance(SeanceDto event) {
 		int id = dao.lookForNewId();
 		event.setCodeSeance(id);
 		
 		dao.insert(event);
 		dao.insertSeancesGroupes(event);
+
+		// retourne un cours complet
+		// triche pour dernier rush
+		CoursDao coursDao = BDDFactory.getDbi().open(CoursDao.class);
+
+
+		return coursDao.findCoursByCodeSeance(id);
 	}
 	
 	
@@ -46,6 +53,26 @@ public class SeanceDBResource {
 
 		dao.updateHoraires(codeSeance, event);
 	}
+
+
+	@PUT
+	@Path("/{codeSeance}/update")
+	public Cours updateEnseignementsEtGroupe(@PathParam("codeSeance") int codeSeance, SeanceDto event) {
+		Seance s = dao.findByCodeSeance(codeSeance);
+
+		if (s == null)
+			throw new WebApplicationException(404);
+
+		dao.updateCodeEnseignement(codeSeance, event);
+		dao.updateCodeGroupe(codeSeance, event);
+
+		// triche pour dernier rush
+		CoursDao coursDao = BDDFactory.getDbi().open(CoursDao.class);
+		return coursDao.findCoursByCodeSeance(codeSeance);
+	}
+
+
+
 	
 	@GET
 	@Path("/{codeSeance}")

@@ -10,11 +10,15 @@ public class Cours {
 	private int dureeSeance;
 	private int codeSeance;
 	private int codeRessource;
+	private int codeEnseignement;
 	private int codeGroupe;
 	private String moduleNom;
 	private String alias;
 	private String nomProf;
 	private String nomGroupe;
+
+	private String couleurPolice = "";
+	private String couleurFond = "";
 
 
 
@@ -96,5 +100,29 @@ public class Cours {
 
 	public void setNomGroupe(String nomGroupe) {
 		this.nomGroupe = nomGroupe;
+	}
+
+	public String getCouleurPolice() {
+		return couleurPolice;
+	}
+
+	public void setCouleurPolice(String couleurPolice) {
+		this.couleurPolice = couleurPolice;
+	}
+
+	public String getCouleurFond() {
+		return couleurFond;
+	}
+
+	public void setCouleurFond(String couleurFond) {
+		this.couleurFond = couleurFond;
+	}
+
+	public int getCodeEnseignement() {
+		return codeEnseignement;
+	}
+
+	public void setCodeEnseignement(int codeEnseignement) {
+		this.codeEnseignement = codeEnseignement;
 	}
 }
