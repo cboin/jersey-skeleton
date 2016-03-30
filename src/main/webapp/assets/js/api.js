@@ -23,8 +23,8 @@ Loader = {
         $.get("/v1/prof", function (data) {
             Loader.vars.profs = data;
             console.log("profs chargés...");
-            //Loader.loadEnseignements();
-            Loader.loadEnseignements();
+            Loader.allLoaded();
+
         })
     },
 
@@ -33,7 +33,10 @@ Loader = {
      * @param groupeId
      */
     loadEnseignements: function (groupeId) {
-        console.log("Fetch courses for " + groupeId);
+        if(typeof groupeId === "undefined"){
+            return;
+        }
+
         $.get("/v1/enseignements/" + groupeId, function (data) {
             Loader.vars.enseignements = data;
             console.log("enseignements chargés...");

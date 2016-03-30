@@ -11,6 +11,7 @@ public class Groupe  {
 
    
     private int codeGroupe;
+    private int codeComposante;
     private int couleurFond;
     private String nom;
     private String alias;
@@ -117,6 +118,12 @@ public class Groupe  {
 			return false;
 		return true;
 	}
-	
-	
+
+	public int getCodeComposante() {
+		return codeComposante;
+	}
+
+	public void setCodeComposante(int codeComposante) {
+		this.codeComposante = codeComposante;
+	}
 }

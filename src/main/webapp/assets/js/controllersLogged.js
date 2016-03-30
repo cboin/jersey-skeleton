@@ -24,6 +24,7 @@ edtControllers.controller('EDTController', function ($scope, $http) {
      */
     $http.get('v1/groupe').success(function (data) {
         $scope.promotions = data;
+        console.log(data);
 
         $("#promotion").change(function () {
 
@@ -271,7 +272,7 @@ edtControllers.controller('EDTController', function ($scope, $http) {
 
     // Watch for promo change
     $scope.$watch("selectPromo", function (newValue, oldValue) {
-        if (typeof newValue === 'undefined' || newValue === 'none') {
+        if (newValue === undefined || typeof newValue === 'undefined' || newValue === 'none') {
             return;
         }
         Loader.loadEnseignements(newValue);

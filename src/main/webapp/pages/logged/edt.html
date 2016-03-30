@@ -9,7 +9,7 @@
             <td>
                 <select name="promotion" id="promotion" ng-model="selectPromo" style="min-width: 200px;">
                     <option value="none">Faites un choix</option>
-                    <option ng-repeat="option in promotions | filter:queryGroupe" value="{{option.codeGroupe}}">{{option.nom}}</option>
+                    <option ng-repeat="option in promotions | filter:queryGroupe | filter: {codeComposante: selectComposante}" data-composante="{{ option.codeComposante }}" value="{{option.codeGroupe}}">{{option.nom}}</option>
                 </select>
                 <input type="text" placeholder="Recherche..." ng-model="queryGroupe" size="10" value="n4p2">
             </td>
