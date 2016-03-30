@@ -35,6 +35,17 @@ public class SeanceDBResource {
 
 		dao.updateHoraires(codeSeance, event);
 	}
+	
+	@GET
+	@Path("/{codeSeance}")
+	public Seance getSeanceByCode(@PathParam("codeSeance") int codeSeance) {
+		Seance s = dao.findByCodeSeance(codeSeance);
+		
+		if (s == null)
+			throw new WebApplicationException(404);
+		
+		return s;
+	}
 
 
 

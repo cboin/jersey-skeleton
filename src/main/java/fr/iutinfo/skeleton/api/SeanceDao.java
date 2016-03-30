@@ -30,7 +30,8 @@ public interface SeanceDao {
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	void deleteSeanceGroupeWithId(@Bind("codeSeance") int codeSeance);
 
-
+	@SqlUpdate("INSERT into seances (codeSeance, dateSeance, heureSeance, Enseignement, Groupe, Prof) values (:codeSeance, :dateSeance, :heureSeance, :Enseignement, :Groupe, :Prof)")
+	void insert(@BindBean Seance seance);
 
 	void close();
 
@@ -38,10 +39,15 @@ public interface SeanceDao {
 	@SqlUpdate("UPDATE seances SET dateSeance=:date,  heureSeance=:heure, dureeSeance=:duree  WHERE codeSeance = :codeSeance")
 	void updateHoraires(@Bind("codeSeance") int codeSeance, @BindBean() EventDto eventDto);
 
-
 	@SqlQuery("SELECT MAX(codeSeance)+1 AS newId FROM seances")
 	int lookForNewId();
 
-	void ajouterSeance();
+
+	@SqlUpdate("drop table if exists seances")
+	void dropTable();
+
+	@SqlUpdate("create table seances (codeSeance integer primary key, dateSeance date, heureSeance integer, Enseignement varchar(255), Groupe varchar(100), Prof varchar(100))")
+	void createTable();
+
 
 }
