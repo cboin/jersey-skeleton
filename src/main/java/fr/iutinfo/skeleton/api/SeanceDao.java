@@ -31,7 +31,7 @@ public interface SeanceDao {
 	void deleteSeanceGroupeWithId(@Bind("codeSeance") int codeSeance);
 
 	@SqlUpdate("INSERT into seances (codeSeance, dateSeance, heureSeance, Enseignement, Groupe, Prof) values (:codeSeance, :dateSeance, :heureSeance, :Enseignement, :Groupe, :Prof)")
-	void insert(@BindBean Seance seance);
+	void insert(@BindBean SeanceDto seanceDto);
 
 	void close();
 

@@ -26,6 +26,14 @@ public class SeanceDBResource {
 	}
 
 	@POST
+	@Path("/add")
+	public void createSeance(SeanceDto event) {
+		
+		dao.insert(event);
+	}
+	
+	
+	@POST
 	@Path("/{codeSeance}/horaires")
 	public void updateHoraires(@PathParam("codeSeance") int codeSeance, EventDto event) {
 		Seance s = dao.findByCodeSeance(codeSeance);
