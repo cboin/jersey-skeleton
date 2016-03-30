@@ -30,7 +30,7 @@ public interface SeanceDao {
 	@RegisterMapperFactory(BeanMapperFactory.class)
 	void deleteSeanceGroupeWithId(@Bind("codeSeance") int codeSeance);
 
-	@SqlUpdate("INSERT into seances (codeSeance, dateSeance, heureSeance, Enseignement, Groupe, Prof) values (:codeSeance, :dateSeance, :heureSeance, :Enseignement, :Groupe, :Prof)")
+	@SqlUpdate("INSERT into seances (codeSeance, dateSeance, dureeSeance, heureSeance, Enseignement, Groupe, Prof) values (:codeSeance, :dateSeance, :dureeSeance, :heureSeance, :Enseignement, :Groupe, :Prof)")
 	void insert(@BindBean SeanceDto seanceDto);
 
 	void close();

@@ -10,6 +10,7 @@ public class SeanceDto {
 	private String Groupe;
 	private String Prof;
 	private int codeSeance;
+	private int dureeSeance;
 	
 	public Date getDateSeance() {
 		return dateSeance;
@@ -57,5 +58,13 @@ public class SeanceDto {
 
 	public void setCodeSeance(int codeSeance) {
 		this.codeSeance = codeSeance;
+	}
+
+	public int getDureeSeance() {
+		return dureeSeance;
+	}
+
+	public void setDureeSeance(int dureeSeance) {
+		this.dureeSeance = dureeSeance;
 	}
 }
