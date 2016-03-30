@@ -6,11 +6,11 @@ public class SeanceDto {
 
 	private Date dateSeance;
 	private int heureSeance;
-	private String Enseignement;
+	private int Enseignement;
 	private String Groupe;
-	private String Prof;
 	private int codeSeance;
 	private int dureeSeance;
+	private int codeProprietaire = Api.CODE_PROPRIO;
 	
 	public Date getDateSeance() {
 		return dateSeance;
@@ -28,11 +28,11 @@ public class SeanceDto {
 		this.heureSeance = heureSeance;
 	}
 	
-	public String getEnseignement() {
+	public int getEnseignement() {
 		return Enseignement;
 	}
 	
-	public void setEnseignement(String enseignement) {
+	public void setEnseignement(int enseignement) {
 		Enseignement = enseignement;
 	}
 	
@@ -43,14 +43,7 @@ public class SeanceDto {
 	public void setGroupe(String groupe) {
 		Groupe = groupe;
 	}
-	
-	public String getProf() {
-		return Prof;
-	}
-	
-	public void setProf(String prof) {
-		Prof = prof;
-	}
+
 
 	public int getCodeSeance() {
 		return codeSeance;
@@ -66,5 +59,13 @@ public class SeanceDto {
 
 	public void setDureeSeance(int dureeSeance) {
 		this.dureeSeance = dureeSeance;
+	}
+
+	public int getCodeProprietaire() {
+		return codeProprietaire;
+	}
+
+	public void setCodeProprietaire(int codeProprietaire) {
+		this.codeProprietaire = codeProprietaire;
 	}
 }
