@@ -111,7 +111,6 @@ edtControllers.controller('EDTController', function ($scope, $http) {
 
                 $("#calendar").fullCalendar('rerenderEvents');
 
-
             });
 
 
