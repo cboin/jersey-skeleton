@@ -51,4 +51,29 @@ public class SeanceDBResource {
 	}
 
 
+
+	@GET
+	@Path("/new")
+	public Seance newSeance() {
+
+		// code seance
+		int codeSeance = dao.lookForNewId();
+
+		// on ajoute une séance
+		Seance aEnregistrer = new Seance();
+		aEnregistrer.setCodeSeance(codeSeance);
+		//aEnregistrer.set
+
+		// on ajoute une séance au groupe
+
+
+
+		// on recupére la séance
+		Seance s = dao.findByCodeSeance(codeSeance);
+
+		// return the seance name
+		return s;
+	}
+
+
 }

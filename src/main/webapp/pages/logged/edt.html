@@ -91,10 +91,10 @@
                 <label for="selectGroupe">Groupe :</label>
                 <select name="selectGroupe" id="selectGroupe" ng-model="selectPromo">
                     <option value="none" selected="selected">Selectionnez un groupe</option>
-                    <option ng-repeat="option in promotions | filter:promos" value="{{option.codeGroupe}}">{{ option.nom }}</option>
+                    <option ng-repeat="option in promotions | filter:queryGroupeModal" value="{{option.codeGroupe}}">{{ option.nom }}</option>
                 </select>
 
-                <input type="text" placeholder="Recherche..." ng-model="queryGroupe" size="10">
+                <input type="text" placeholder="Recherche..." ng-model="queryGroupeModal" size="10">
                 <br /><br />
 
 
