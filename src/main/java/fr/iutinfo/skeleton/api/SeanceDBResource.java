@@ -32,6 +32,7 @@ public class SeanceDBResource {
 		event.setCodeSeance(id);
 		
 		dao.insert(event);
+		dao.insertSeancesGroupes(event);
 	}
 	
 	
@@ -60,7 +61,7 @@ public class SeanceDBResource {
 
 
 	@DELETE
-	@Path("/{codeSeance}")
+	@Path("/delete/{codeSeance}")
 	public void removeSeance(@PathParam("codeSeance") int codeSeance) {
 		Seance s = dao.findByCodeSeance(codeSeance);
 

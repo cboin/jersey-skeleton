@@ -195,21 +195,23 @@ edtControllers.controller('EDTController', function ($scope, $http) {
                     // format string
                     var heureDebut = start.format("H") + "" + start.format("mm");
 
+                    var codeGroupe = $("#selectGroupe").val();
+                    var codeEnseignement = $("#selectEnseignement").val();
+
                     var d = {
                         dateSeance: start.format(),
                         heureSeance: heureDebut,
                         codeEnseignement: codeEnseignement,
-                        
+                        codeGroupe: codeGroupe,
                         dureeSeance: duree
                     };
                     console.log(d);
 
-                    /*
-                     $http.post("/v1/seance/" + codeSeance + "/horaires", d, function (data) {
-                     createNotif("success", "Séance modifiée !");
-                     });
 
-                     */
+                    $http.post("/v1/seance/add", d, function (data) {
+                        createNotif("success", "Séance ajoutée !");
+                    });
+
 
                 });
 
@@ -256,7 +258,7 @@ edtControllers.controller('EDTController', function ($scope, $http) {
                     var codeSeance = calEvent.data.codeSeance;
 
                     // suppression
-                    $http.delete("/v1/seance/" + codeSeance).then(function (d) {
+                    $http.delete("/v1/seance/delete/" + codeSeance).then(function (d) {
                         createNotif("success", "Séance supprimée !");
                         $("#calendar").fullCalendar('removeEvents', codeSeance);
                         $("#calendar").fullCalendar('rerenderEvents');

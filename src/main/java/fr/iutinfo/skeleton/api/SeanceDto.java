@@ -6,8 +6,8 @@ public class SeanceDto {
 
 	private Date dateSeance;
 	private int heureSeance;
-	private int Enseignement;
-	private String Groupe;
+	private int codeEnseignement;
+	private int codeGroupe;
 	private int codeSeance;
 	private int dureeSeance;
 	private int codeProprietaire = Api.CODE_PROPRIO;
@@ -27,23 +27,22 @@ public class SeanceDto {
 	public void setHeureSeance(int heureSeance) {
 		this.heureSeance = heureSeance;
 	}
-	
-	public int getEnseignement() {
-		return Enseignement;
-	}
-	
-	public void setEnseignement(int enseignement) {
-		Enseignement = enseignement;
-	}
-	
-	public String getGroupe() {
-		return Groupe;
-	}
-	
-	public void setGroupe(String groupe) {
-		Groupe = groupe;
+
+	public int getCodeEnseignement() {
+		return codeEnseignement;
 	}
 
+	public void setCodeEnseignement(int codeEnseignement) {
+		this.codeEnseignement = codeEnseignement;
+	}
+
+	public int getCodeGroupe() {
+		return codeGroupe;
+	}
+
+	public void setCodeGroupe(int codeGroupe) {
+		this.codeGroupe = codeGroupe;
+	}
 
 	public int getCodeSeance() {
 		return codeSeance;
