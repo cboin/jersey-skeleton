@@ -11,10 +11,12 @@ public class Seance {
 	
 	private int codeSeance;
 	private Date dateSeance;
+	private Date dateCreation;
+	private Date dateModif;
 	private int heureSeance;
 	private int dureeSeance;
-	private int diffusable;
-	private int dateModif;
+	private int diffusable = 1;
+
 	private String Enseignement;
 	private String Salle;
 	private String Groupe;
@@ -87,18 +89,21 @@ public class Seance {
 	}
 
 
-
-	public int getDateModif() {
+	public Date getDateModif() {
 		return dateModif;
 	}
 
-
-
-	public void setDateModif(int dateModif) {
+	public void setDateModif(Date dateModif) {
 		this.dateModif = dateModif;
 	}
 
+	public Date getDateCreation() {
+		return dateCreation;
+	}
 
+	public void setDateCreation(Date dateCreation) {
+		this.dateCreation = dateCreation;
+	}
 
 	public String getEnseignement() {
 		return Enseignement;
