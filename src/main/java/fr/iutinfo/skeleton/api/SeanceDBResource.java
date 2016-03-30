@@ -26,6 +26,16 @@ public class SeanceDBResource {
 	}
 
 	@POST
+	@Path("/add")
+	public void createSeance(SeanceDto event) {
+		int id = dao.lookForNewId();
+		event.setCodeSeance(id);
+		
+		dao.insert(event);
+	}
+	
+	
+	@POST
 	@Path("/{codeSeance}/horaires")
 	public void updateHoraires(@PathParam("codeSeance") int codeSeance, EventDto event) {
 		Seance s = dao.findByCodeSeance(codeSeance);
@@ -59,31 +69,6 @@ public class SeanceDBResource {
 
 		dao.deleteSeanceWithId(codeSeance);
 		dao.deleteSeanceGroupeWithId(codeSeance);
-	}
-
-
-
-	@GET
-	@Path("/new")
-	public Seance newSeance() {
-
-		// code seance
-		int codeSeance = dao.lookForNewId();
-
-		// on ajoute une séance
-		Seance aEnregistrer = new Seance();
-		aEnregistrer.setCodeSeance(codeSeance);
-		//aEnregistrer.set
-
-		// on ajoute une séance au groupe
-
-
-
-		// on recupére la séance
-		Seance s = dao.findByCodeSeance(codeSeance);
-
-		// return the seance name
-		return s;
 	}
 
 

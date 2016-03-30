@@ -23,10 +23,7 @@ public class Seance {
 	private String Prof;
 	private String GroupeId;
 	private int couleurFond;
-	private int couleurPolice;
-
-
-	
+	private int couleurPolice;	
 	
 	public Seance(){
 		
