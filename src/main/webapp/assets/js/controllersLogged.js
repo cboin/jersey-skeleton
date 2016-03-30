@@ -104,7 +104,7 @@ edtControllers.controller('EDTController', function ($scope, $http) {
         });
 
 
-        function changeHoraire (calEvent, jsEvent, ui, view) {
+        function changeHoraire(calEvent, jsEvent, ui, view) {
             if (!EDITABLE) {
                 return;
             }
@@ -147,8 +147,6 @@ edtControllers.controller('EDTController', function ($scope, $http) {
         }
 
 
-
-
         // on affiche le calendrier en selectionnant la promo
         $('#calendar').fullCalendar({
             events: [],
@@ -176,6 +174,45 @@ edtControllers.controller('EDTController', function ($scope, $http) {
                 $scope.$apply();
 
                 $("#addSeance").modal('show');
+
+
+                $("[data-id='save']").off().on('click', function () {
+                    console.log("Trying to save...");
+
+                    // diff time
+                    var s = end.format('X') * 1 - start.format('X') * 1;
+                    var minutes = parseInt(s / 60);
+                    var heures = parseInt(minutes / 60);
+                    minutes = minutes % 60;
+
+                    if (minutes < 10) {
+                        minutes = "0" + minutes;
+                    }
+
+                    var duree = (heures + "" + minutes);
+
+
+                    // format string
+                    var heureDebut = start.format("H") + "" + start.format("mm");
+
+                    var d = {
+                        dateSeance: start.format(),
+                        heureSeance: heureDebut,
+                        codeEnseignement: codeEnseignement,
+                        
+                        dureeSeance: duree
+                    };
+                    console.log(d);
+
+                    /*
+                     $http.post("/v1/seance/" + codeSeance + "/horaires", d, function (data) {
+                     createNotif("success", "Séance modifiée !");
+                     });
+
+                     */
+
+                });
+
 
                 /*
                  var title = prompt('Nom de l\'événement:');
@@ -240,6 +277,7 @@ edtControllers.controller('EDTController', function ($scope, $http) {
             eventDrop: changeHoraire,
             eventResize: changeHoraire,
 
+
             selectable: true,
             editable: true,
             eventLimit: true,
@@ -277,11 +315,6 @@ edtControllers.controller('EDTController', function ($scope, $http) {
         }
         Loader.loadEnseignements(newValue);
     })
-
-
-    $("[data-id='save']").off().on('click', function () {
-
-    });
 
 
 });
