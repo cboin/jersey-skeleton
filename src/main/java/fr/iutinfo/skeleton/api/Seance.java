@@ -17,7 +17,7 @@ public class Seance {
 	private int dureeSeance;
 	private int diffusable = 1;
 
-	private String Enseignement;
+	private int Enseignement;
 	private String Salle;
 	private String Groupe;
 	private String Prof;
@@ -105,13 +105,13 @@ public class Seance {
 		this.dateCreation = dateCreation;
 	}
 
-	public String getEnseignement() {
+	public int getEnseignement() {
 		return Enseignement;
 	}
 
 
 
-	public void setEnseignement(String enseignement) {
+	public void setEnseignement(int enseignement) {
 		Enseignement = enseignement;
 	}
 
