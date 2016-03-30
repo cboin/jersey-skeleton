@@ -33,7 +33,7 @@ public interface SeanceDao {
 	@SqlUpdate("INSERT into seances (codeSeance, dateSeance, dureeSeance, heureSeance, codeEnseignement, codeProprietaire) values (:codeSeance, :dateSeance, :dureeSeance, :heureSeance, :codeEnseignement, :codeProprietaire)")
 	void insert(@BindBean SeanceDto seanceDto);
 
-	@SqlUpdate("INSERT into seances_groupes (codeSeance, codeRessource, deleted, codeProprietaire) values (:codeSeance, :codeGroupe, 1, :codeProprietaire)")
+	@SqlUpdate("INSERT into seances_groupes (codeSeance, codeRessource, deleted, codeProprietaire) values (:codeSeance, :codeGroupe, 0, :codeProprietaire)")
 	void insertSeancesGroupes(@BindBean SeanceDto seanceDto);
 
 

@@ -25,7 +25,7 @@ public interface EnseignementGroupesDao {
 			"enseignements\n" +
 			"INNER JOIN enseignements_groupes ON enseignements_groupes.codeEnseignement = enseignements.codeEnseignement\n" +
 			"INNER JOIN ressources_groupes ON enseignements_groupes.codeRessource = ressources_groupes.codeGroupe\n" +
-			"INNER JOIN enseignements_profs ON enseignements_profs.codeEnseignement = enseignements.codeEnseignement\n" +
+			"INNER JOIN enseignements_profs ON enseignements_profs.codeEnseignement = enseignements.codeEnseignement AND enseignements_profs.deleted = 0\n" +
 			"INNER JOIN ressources_profs ON ressources_profs.codeProf = enseignements_profs.codeRessource\n" +
 			"WHERE\n" +
 			"ressources_groupes.codeGroupe = :codeGroupe")
